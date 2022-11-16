@@ -21,3 +21,6 @@
 /UnityEngine.UI.csproj
 /kcp2k.csproj
 /where-allocations.csproj
+/obj/Debug
+/.vsconfig
+/.vs
