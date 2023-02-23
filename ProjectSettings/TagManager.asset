@@ -3,18 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Decoder
+  - MinimapCamera
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Mask
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - BehindMask
+  - Black
+  - MiniMap
   - 
   - 
   - 

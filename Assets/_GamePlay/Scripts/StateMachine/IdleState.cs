@@ -6,17 +6,17 @@ public class IdleState : Singleton<IdleState>, IState<Character>
 {
     public void OnEnter(Character t)
     {
-        t.OnChangeAnim(Constant.ANIM_IDLE);
+        t.OnIdleStart();
     }
 
     public void OnExecute(Character t)
     {
-
+        t.OnIdleExecute();
     }
 
     public void OnExit(Character t)
     {
-
+        t.OnIdleExit();
     }
 
 }

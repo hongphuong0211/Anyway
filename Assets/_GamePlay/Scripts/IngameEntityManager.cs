@@ -6,26 +6,27 @@ using UnityEngine;
 
 public class IngameEntityManager : Singleton<IngameEntityManager>
 {
-    Dictionary<IngameType, List<GameUnit>> ingameEntity = new Dictionary<IngameType, List<GameUnit>>();
+    [SerializeField] Dictionary<IngameType, List<GameUnit>> ingameEntity = new Dictionary<IngameType, List<GameUnit>>();
 
     //de cache lai list
-    private List<GameUnit> randomList = new List<GameUnit>();
+    [SerializeField] private List<GameUnit> randomList = new List<GameUnit>();
 
     public void RegisterEntity(GameUnit unit)
     {
-        if (!ingameEntity.ContainsKey(unit.ID))
+        if (!ingameEntity.ContainsKey(unit.Ingame_ID))
         {
-            ingameEntity[unit.ID] = new List<GameUnit>();
+            ingameEntity[unit.Ingame_ID] = new List<GameUnit>();
         }
 
-        ingameEntity[unit.ID].Add(unit);
+        ingameEntity[unit.Ingame_ID].Add(unit);
+        Debug.Log(unit.Ingame_ID.ToString() + "[" + ingameEntity[unit.Ingame_ID].Count + "]" + ": " + unit.gameObject.name);
     }
 
     public void UnregisterEntity(GameUnit unit)
     {
-        if (ingameEntity.ContainsKey(unit.ID))
+        if (ingameEntity.ContainsKey(unit.Ingame_ID))
         {
-            ingameEntity[unit.ID].Remove(unit);
+            ingameEntity[unit.Ingame_ID].Remove(unit);
         }
     }
 
@@ -79,7 +80,7 @@ public class IngameEntityManager : Singleton<IngameEntityManager>
 
             for (int i = 0; i < randomList.Count; i++)
             {
-                cPos = randomList[i].tf.position;
+                cPos = randomList[i].Transform.position;
                 distance = (cPos - finder).sqrMagnitude;
                 if (distance < nearestDistance)
                 {
@@ -103,7 +104,7 @@ public class IngameEntityManager : Singleton<IngameEntityManager>
 
             for (int i = 0; i < randomList.Count; i++)
             {
-                Vector3 cPos = randomList[i].tf.position;
+                Vector3 cPos = randomList[i].Transform.position;
                 float distance = (cPos - finder).sqrMagnitude;
                 if (distance <= max && distance >= min)
                 {

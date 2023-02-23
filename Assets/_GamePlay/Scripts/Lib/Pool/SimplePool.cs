@@ -10,6 +10,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Mirror;
 
 public static class SimplePool
 {
@@ -41,7 +42,7 @@ public static class SimplePool
         }
     }
 
-    class Pool
+    class Pool: NetworkBehaviour
     {
         Transform m_sRoot = null;
 
@@ -80,7 +81,7 @@ public static class SimplePool
         {
             GameUnit obj = Spawn();
 
-            obj.tf.SetPositionAndRotation(pos, rot);
+            obj.Transform.SetPositionAndRotation(pos, rot);
 
             return obj;
         }
@@ -94,6 +95,7 @@ public static class SimplePool
 
                 if (!pools.ContainsKey(obj.GetInstanceID()))
                     pools.Add(obj.GetInstanceID(), this);
+                NetworkServer.Spawn(obj.gameObject);
             }
             else
             {
@@ -251,7 +253,13 @@ public static class SimplePool
                 GameObject.Destroy(obj.gameObject);
         }
     }
-
+    static public void Release()
+    {
+        foreach(int key in pools.Keys){
+            pools[key].Release();
+            pools.Remove(key);
+        }
+    }
     static public void Release(GameUnit obj)
     {
         if (pools.ContainsKey(obj.GetInstanceID()))
@@ -320,15 +328,6 @@ public class PoolAmount
     public bool clamp;
 }
 
-public enum IngameType
-{
-    SURVIVOR,
-    HUNTER,
-    None,
-    HpBar,
-}
-
-
 public enum PoolType
 {
     Survivor_1, Survivor_2, Survivor_3, Survivor_4, Survivor_5, Survivor_6, Survivor_7, Survivor_8, Survivor_9, Survivor_10,
@@ -337,29 +336,5 @@ public enum PoolType
     TextCombat,
     Mess,
     None,
-
-}
-
-
-public class GameUnit : MonoBehaviour
-{
-    private Transform trans;
-    public Transform tf
-    {
-        get
-        {
-            if (trans == null)
-            {
-                trans = gameObject.transform;
-            }
-            return trans;
-        }
-    }
-
-    public IngameType ID;
-    public PoolType poolType;
-
-    public virtual void OnInit() { }
-    public virtual void OnDespawn() { }
 
 }

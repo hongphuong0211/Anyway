@@ -10,7 +10,7 @@ public class UICanvas : MonoBehaviour
     protected RectTransform m_RectTransform;
     private Animator m_Animator;
     private bool m_IsInit = false;
-    private float m_OffsetY = 0;
+    //private float m_OffsetY = 0;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class UICanvas : MonoBehaviour
         //    m_RectTransform.offsetMin = leftBottom;
         //    m_OffsetY = 100f;
         //}
-        //m_IsInit = true;
+        m_IsInit = true;
     }
 
     public virtual void Setup()

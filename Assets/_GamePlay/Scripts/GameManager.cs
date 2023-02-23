@@ -3,9 +3,24 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
-
+using Mirror.Discovery;
+using Mirror;
+[RequireComponent(typeof(NetworkDiscovery))]
 public class GameManager : Singleton<GameManager>
 {
+    readonly Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
+    [SerializeField]private NetworkDiscovery networkDiscovery;
+    #if UNITY_EDITOR
+    void OnValidate()
+    {
+        if (networkDiscovery == null)
+        {
+            networkDiscovery = GetComponent<NetworkDiscovery>();
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(networkDiscovery.OnServerFound, OnDiscoveredServer);
+            UnityEditor.Undo.RecordObjects(new Object[] { this, networkDiscovery }, "Set NetworkDiscovery");
+        }
+    }
+#endif
     [SerializeField] UserData userData;
     //[SerializeField] CSVData csv;
     private static GameState gameState = GameState.MainMenu;
@@ -27,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 
         //csv.OnInit();
         userData?.OnInitData();
-
+        UI_Game.Instance.OpenUI(UIID.UICMainMenu);
         ChangeState(GameState.MainMenu);
 
     }
@@ -41,14 +56,14 @@ public class GameManager : Singleton<GameManager>
     {
         return gameState == state;
     }
-    private void Start()
-    {
-        //CheckOfflineEarning();
-    }
-    private void OnApplicationQuit()
-    {
-        userData.SetStringData(UserData.Key_Last_Time_Play, ref userData.lastTimePlay, System.DateTime.Now.ToString(CultureInfo.InvariantCulture));
-    }
+    // private void Start()
+    // {
+    //     //CheckOfflineEarning();
+    // }
+    // private void OnApplicationQuit()
+    // {
+        // userData.SetStringData(UserData.Key_Last_Time_Play, ref userData.lastTimePlay, System.DateTime.Now.ToString(CultureInfo.InvariantCulture));
+    //}
     //private void CheckOfflineEarning()
     //{
     //    System.DateTime dtNow = System.DateTime.Now;
@@ -62,4 +77,45 @@ public class GameManager : Singleton<GameManager>
     //        UI_Game.Instance.OpenUI<UIOfflineEarning>(UIID.UICOfflineEarnings).Setup(coinGain);
     //    }
     //}
+    #region Connect
+    bool isFinding = false;
+    public void StartHost()
+    {
+        isFinding = false;
+        discoveredServers.Clear();
+        MyNetworkManager.Instance.StartHost();
+        networkDiscovery.AdvertiseServer();
+    }
+    public void FindRoom()
+    {
+        isFinding = true;
+        discoveredServers.Clear();
+        networkDiscovery.StartDiscovery();
+    }
+    public void CancelConnect(){
+        isFinding = false;
+        discoveredServers.Clear();
+        networkDiscovery.StopDiscovery();
+    }
+    void Connect(ServerResponse info)
+    {
+        networkDiscovery.StopDiscovery();
+        MyNetworkManager.Instance.StartClient(info.uri);
+    }
+    public void OnDiscoveredServer(ServerResponse info)
+    {
+        // Note that you can check the versioning to decide if you can connect to the server or not using this method
+        discoveredServers[info.serverId] = info;
+        Debug.Log(info.serverId);
+    }
+    private void Update() {
+        if(isFinding){
+            foreach (ServerResponse info in discoveredServers.Values){
+                isFinding = false;
+                UI_Game.Instance.GetUI<UICMainMenu>(UIID.UICMainMenu).setFindState(false);
+                Connect(info);
+            }
+        }
+    }
+    #endregion
 }

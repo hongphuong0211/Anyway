@@ -22,6 +22,8 @@ public enum UIID
     UICAdsEarnings = 10,
     UICClaim = 11,
     UICFreeCharacter = 12,
+    UICDecode = 13,
+    UICRoom = 14
 }
 
 
@@ -31,7 +33,11 @@ public class UI_Game : Singleton<UI_Game>
     private Dictionary<UIID, UICanvas> UICanvas = new Dictionary<UIID, UICanvas>();
 
     public Transform CanvasParentTF;
-
+    private Canvas CanvasParent;
+    protected override void Awake() {
+        base.Awake();
+        CanvasParent = GetComponent<Canvas>();
+    }
     private static string[] m_CoinText = new string[9] { "", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc" };
 
     #region Canvas
@@ -103,6 +109,15 @@ public class UI_Game : Singleton<UI_Game>
         if (Input.GetKey(KeyCode.Escape) && BackTopUI != null)
         {
             BackActionEvents[BackTopUI]?.Invoke();
+        }
+        if(CanvasParent.worldCamera == null){
+            Camera[] camares = FindObjectsOfType<Camera>();
+            foreach(Camera cam in camares){
+                if (cam.gameObject.CompareTag("MainCamera")){
+                    CanvasParent.worldCamera = cam;
+                    break;
+                }
+            }
         }
     }
 

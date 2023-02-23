@@ -93,6 +93,7 @@ public enum CharacterType
 {
     SURVIVOR = 1,
     HUNTER = 2,
+    ALL = -1,
 }
 [System.Serializable]
 public class CharacterData

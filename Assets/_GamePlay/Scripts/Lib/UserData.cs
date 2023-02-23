@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Numerics;
 using System.Globalization;
+using System;
 
 [CreateAssetMenu(fileName = "UserData", menuName = "ScriptableObjects/UserData", order = 1)]
 public class UserData : ScriptableObject
@@ -18,11 +19,11 @@ public class UserData : ScriptableObject
     public bool fxIsOn = true;
     public bool tutorialed = false;
 
-    public int maxLevelMeleeUnlock = 0;
-    public int maxLevelRangeUnlock = 0;
+    public List<int> listSurvivorUnlock = new List<int>() { 0, 1, 2, 3 };
+    public List<int> listHunterUnlock = new List<int>() { 0 };
 
-    public int meleeHaveOwned = 0;
-    public int rangeHaveOwned = 0;
+    // public int meleeHaveOwned = 0;
+    // public int rangeHaveOwned = 0;
 
     public string lastTimePlay;
 
@@ -102,14 +103,36 @@ public class UserData : ScriptableObject
         tutorialed = PlayerPrefs.GetInt(Key_Tutorial, 0) == 1;
         lastTimePlay = PlayerPrefs.GetString(Key_Last_Time_Play, System.DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
-        maxLevelMeleeUnlock = PlayerPrefs.GetInt(Key_Max_Level_Melee_Unlock, 1);
-        maxLevelRangeUnlock = PlayerPrefs.GetInt(Key_Max_Level_Range_Unlock, 1);
-
-        meleeHaveOwned = PlayerPrefs.GetInt(Key_Melee_Have_Owned, 0);
-        rangeHaveOwned = PlayerPrefs.GetInt(Key_Range_Have_Owned, 0);
+        listSurvivorUnlock = GetIntsFromString(PlayerPrefs.GetString(Key_Survivor_Unlock, "0 1 2 3"));
+        listHunterUnlock = GetIntsFromString(PlayerPrefs.GetString(Key_Hunter_Unlock, GetStringFromInts(new List<int>() { 0 })));
 
     }
+    public List<int> GetIntsFromString(string str)
+    {
+        List<int> ints = new List<int>();
 
+        string[] splitString = str.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string item in splitString)
+        {
+            try
+            {
+                ints.Add(Convert.ToInt32(item));
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Value in string was not an int.");
+                Debug.LogException(e);
+            }
+        }
+        return ints;
+    }
+    public string GetStringFromInts(List<int> listInts){
+        string stringInts = ""; 
+        foreach (int item in listInts){
+            stringInts += item + " ";
+        }
+        return stringInts;
+    }
     public void OnResetData()
     {
         PlayerPrefs.DeleteAll();
@@ -128,8 +151,8 @@ public class UserData : ScriptableObject
     public const string Key_Slot_Type_ = "KeySlotType_";
     public const string Key_Slot_Level_ = "KeySlotLevel_";
 
-    public const string Key_Max_Level_Melee_Unlock = "Key_Max_Level_Melee_Unlock";
-    public const string Key_Max_Level_Range_Unlock = "Key_Max_Level_Range_Unlock";
+    public const string Key_Survivor_Unlock = "Key_Survivor_Unlock";
+    public const string Key_Hunter_Unlock = "Key_Hunter_Unlock";
 
     public const string Key_Melee_Have_Owned = "Key_Melee_Have_Owned";
     public const string Key_Range_Have_Owned = "Key_Range_Have_Owned";

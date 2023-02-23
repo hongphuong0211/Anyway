@@ -118,7 +118,7 @@
 // [6] R. Baillie and S. S. Wagstaff Jr, "Lucas Pseudoprimes", Mathematics of Computation,
 //     Vol. 35, No. 152, Oct 1980, pp. 1391-1417.
 //
-// [7] H. C. Williams, "Édouard Lucas and Primality Testing", Canadian Mathematical
+// [7] H. C. Williams, "ï¿½douard Lucas and Primality Testing", Canadian Mathematical
 //     Society Series of Monographs and Advance Texts, vol. 22, John Wiley & Sons, New York,
 //     NY, 1998.
 //
@@ -1231,7 +1231,6 @@ public struct BigNumber
 
     public static BigNumber ParseFromCharacterFormat(string s)
     {
-        BigNumber rNum;
         string s1 = "-1";
         int num = 0;
         for (int i = 1; i < sRank.Length; i++)
@@ -1250,7 +1249,6 @@ public struct BigNumber
         }
         else
         {
-            string s5 = "1";
             int m = 0;
             for (int i = 0; i < num; i++)
             {
