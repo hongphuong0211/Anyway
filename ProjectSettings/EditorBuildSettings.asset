@@ -14,15 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_GamePlay/Scenes/Gameplay.unity
     guid: 9a49ef63c38cf283eb9431c5edbf5d89
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mirror/Examples/Room/Scenes/OfflineScene.unity
     guid: 9e6f14982412b2545a0911ebaaa46a23
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
     guid: 48478f4d522f96945b8396f376299d3a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mirror/Examples/Room/Scenes/OnlineScene.unity
     guid: d7a6763559b31854586c9e49916273ef
+  - enabled: 1
+    path: Assets/_GamePlay/Scenes/Room.unity
+    guid: 3588319f4524692b9a8ff5c37023737c
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3ad197cf9bc8e3c73a5ce8474839e4ac, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 1f9f80ae1a12a759b8e8925cf771fa2a, type: 2}

@@ -205,10 +205,10 @@ MonoBehaviour:
   autoConnectClientBuild: 0
   sendRate: 30
   offlineScene: Assets/_GamePlay/Scenes/OfflineScene.unity
-  onlineScene: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
+  onlineScene: Assets/_GamePlay/Scenes/Room.unity
   transport: {fileID: 13110570}
   networkAddress: 0.0.0.0
-  maxConnections: 3
+  maxConnections: 2
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 7545203196549828793, guid: 29b1cef576ac27a4dbca3163ba48f33f, type: 3}
   autoCreatePlayer: 1
@@ -218,9 +218,9 @@ MonoBehaviour:
   - {fileID: 2269791275272095316, guid: e842266fc3c0f41518f53e615a61ee5c, type: 3}
   timeInterpolationGui: 0
   showRoomGUI: 0
-  minPlayers: 3
+  minPlayers: 2
   roomPlayerPrefab: {fileID: 4541991827283355233, guid: b8b9f799f39e9dea5be8ffb4c20be377, type: 3}
-  RoomScene: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
+  RoomScene: Assets/_GamePlay/Scenes/Room.unity
   GameplayScene: Assets/_GamePlay/Scenes/Gameplay.unity
   _allPlayersReady: 0
   roomSlots: []
@@ -707,7 +707,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 334388258}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 5
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -715,7 +715,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!224 &1759811259
 RectTransform:

@@ -82,13 +82,13 @@ public class Player : NetworkBehaviour
     }
     private void Update()
     {
-        if (!isLocalPlayer) return;
+        if (isLocalPlayer)
         {
             if (IngameManager.Instance.Player == null || IngameManager.Instance.GetCharacter() == null)
             {
                 IngameManager.Instance.Player = this;
             }
-            if (IngameManager.Instance.GetCharacter().IsDead()) return;
+            if (m_Character.IsDeath) return;
             Vector2 inputDirection = new Vector2(joystick.Horizontal, joystick.Vertical);
             if (inputDirection.sqrMagnitude > 0.0001f)
             {

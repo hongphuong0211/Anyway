@@ -120,7 +120,6 @@ public class Character : Creature
     public void Death()
     {
         //TODO: Add vfx
-        Debug.Log("Die");
         IngameEntityManager.Instance.UnregisterEntity(this);
         CharacterControl.AnimationManager.Die();
         //OnDespawn();
@@ -164,7 +163,7 @@ public class Character : Creature
     private float m_PauseDetectTime = 0.5f;
     public override void OnRunning()
     {
-        if (IsDead()) return;
+        if (IsDeath) return;
 #if UNITY_EDITOR
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -205,7 +204,7 @@ public class Character : Creature
     public virtual void OnControlStart() { }
     public virtual void OnControlExecute()
     {
-        if (IsDead()) return;
+        if (IsDeath) return;
         IsRunning = m_InputMovement.x != 0f || m_InputMovement.y != 0f;
         Move();
     }
