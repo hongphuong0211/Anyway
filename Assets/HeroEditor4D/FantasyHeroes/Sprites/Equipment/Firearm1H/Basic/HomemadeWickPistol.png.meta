@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0cc91dd6a31b3284e8ec1bee14bdaff6
+guid: 6cde62381eb81c14bab2bed8b05019ff
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -768287472138149725
     second: Bullet
+  - first:
+      213: -3905612625394228665
+    second: Shell
+  - first:
+      213: -4064889734069160559
+    second: Side
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -26,7 +32,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -106,26 +112,62 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gun
+      name: Side
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 0
-        width: 128
+        width: 256
         height: 448
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.6, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59080044942672080800000000000000
-      internalID: -9212286445950041963
+      spriteID: 195fca5d25c9697c0800000000000000
+      internalID: -4064889734069160559
       vertices: []
       indices: 
       edges: []
@@ -134,7 +176,7 @@ TextureImporter:
       name: Bullet
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 448
         width: 64
         height: 64
@@ -151,6 +193,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Shell
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742a811920a7cc9c0800000000000000
+      internalID: -3905612625394228665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -163,7 +226,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Bullet: -768287472138149725
-      Gun: -9212286445950041963
+      Side: -4064889734069160559
+      Shell: -3905612625394228665
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

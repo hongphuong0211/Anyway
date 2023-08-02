@@ -10,10 +10,10 @@ TextureImporter:
     second: FrontRight
   - first:
       213: -7723269463868277591
-    second: BackRight
+    second: BackLeft
   - first:
       213: -5411889706109369529
-    second: BackLeft
+    second: BackRight
   - first:
       213: 8968894577945027273
     second: Left
@@ -94,6 +94,66 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -140,7 +200,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackRight
+      name: BackLeft
       rect:
         serializedVersion: 2
         x: 320
@@ -161,7 +221,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackLeft
+      name: BackRight
       rect:
         serializedVersion: 2
         x: 480
@@ -237,8 +297,8 @@ TextureImporter:
       FrontRight: -6687424269700598363
       Right: -8979658097689788454
       Left: 8968894577945027273
-      BackRight: -7723269463868277591
-      BackLeft: -5411889706109369529
+      BackRight: -5411889706109369529
+      BackLeft: -7723269463868277591
       FrontLeft: 4555760360524595768
   spritePackingTag: 
   pSDRemoveMatte: 0

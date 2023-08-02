@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.HeroEditor4D.Common.SimpleColorPicker.Scripts
+namespace Assets.HeroEditor4D.Common.Scripts.SimpleColorPicker.Scripts
 {
 	/// <summary>
 	/// Main gradient representation (brightness/saturation).

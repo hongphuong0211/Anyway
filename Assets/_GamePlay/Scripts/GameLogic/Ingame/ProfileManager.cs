@@ -31,7 +31,7 @@ public class ProfileManager : Singleton<ProfileManager> {
     private void LoadDataFromPref() {
         Debug.Log("Load Data");
         string dataText = PlayerPrefs.GetString("SuperFetch", "");
-        //Debug.Log("Data " + dataText);
+        Debug.Log("Data " + dataText);
         if (string.IsNullOrEmpty(dataText)) {
             // Dont have -> create new player and save;
             CreateNewPlayer();

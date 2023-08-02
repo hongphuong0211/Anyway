@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DecodeState : Singleton<DecodeState>, IState<Character>
+namespace GamePlay
 {
-    public void OnEnter(Character t)
+    public class DecodeState : Singleton<DecodeState>, IState<Character>
     {
-        //t.OnChangeAnim(Constant.ANIM_CONTROL);
-        ((Survivor)t).OnDecodeStart();
-    }
+        public void OnEnter(Character t)
+        {
+            //t.OnChangeAnim(Constant.ANIM_CONTROL);
+            ((Survivor)t).OnDecodeStart();
+        }
 
-    public void OnExecute(Character t)
-    {
-        ((Survivor)t).OnDecodeExecute();
-    }
+        public void OnExecute(Character t)
+        {
+            ((Survivor)t).OnDecodeExecute();
+        }
 
-    public void OnExit(Character t)
-    {
-        ((Survivor)t).OnDecodeExit();
+        public void OnExit(Character t)
+        {
+            ((Survivor)t).OnDecodeExit();
+        }
     }
 }

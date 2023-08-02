@@ -11,7 +11,7 @@ Shader "Hero Editor/Gray Paint" {
         [MaterialToggle] _Inverse ("Inverse", Float ) = 0
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
 
-		// These six unused properties are required when a shader is used in the UI system, or you get a warning.
+		// these six unused properties are required when a shader is used in the UI system, or you get a warning.
 		_StencilComp("Stencil Comparison", Float) = 8
 		_Stencil("Stencil ID", Float) = 0
 		_StencilOp("Stencil Operation", Float) = 0
@@ -28,10 +28,7 @@ Shader "Hero Editor/Gray Paint" {
             "PreviewType"="Plane"
         }
         Pass {
-            Name "FORWARD"
-            Tags {
-                "LightMode"="ForwardBase"
-            }
+            Name "FORWARD"            
             Blend SrcAlpha OneMinusSrcAlpha
             Cull Off
             ZWrite Off
@@ -52,7 +49,7 @@ Shader "Hero Editor/Gray Paint" {
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
             #pragma multi_compile_fwdbase
-            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
+            //#pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
             #pragma target 3.0
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _SaturationBound;
@@ -138,7 +135,7 @@ Shader "Hero Editor/Gray Paint" {
             #include "Lighting.cginc"
             #pragma fragmentoption ARB_precision_hint_fastest
             #pragma multi_compile_shadowcaster
-            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
+            //#pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
             #pragma target 2.0
             struct VertexInput {
                 float4 vertex : POSITION;

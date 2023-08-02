@@ -14,6 +14,18 @@ namespace Mirror.Examples.NetworkRoom
         [Tooltip("Reward Prefab for the Spawner")]
         public GameObject rewardPrefab;
 
+        public static new NetworkRoomManagerExt singleton { get; private set; }
+
+        /// <summary>
+        /// Runs on both Server and Client
+        /// Networking is NOT initialized when this fires
+        /// </summary>
+        public override void Awake()
+        {
+            base.Awake();
+            singleton = this;
+        }
+
         /// <summary>
         /// This is called on the server when a networked scene finishes loading.
         /// </summary>
@@ -75,7 +87,7 @@ namespace Mirror.Examples.NetworkRoom
         {
             base.OnGUI();
 
-            if (allPlayersReady && showStartButton)
+            if (allPlayersReady && showStartButton && GUI.Button(new Rect(150, 300, 120, 20), "START GAME"))
             {
                 // set to false to hide it in the game scene
                 showStartButton = false;

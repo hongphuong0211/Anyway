@@ -291,7 +291,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -2}
+        value: {x: 0, y: 0, z: -20}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -2500,7 +2500,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -2
+        value: -20
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -4529,7 +4529,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Front/UpperBody/ArmRAnchor/ArmR
+    path: Left/UpperBody/HeadAnchor/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4539,7 +4539,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Front/UpperBody/ArmRAnchor/ArmR
+    path: Left/UpperBody/HeadAnchor/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4549,7 +4549,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Front/UpperBody/ArmRAnchor/ArmR
+    path: Left/UpperBody/HeadAnchor/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5069,7 +5069,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Left/UpperBody/HeadAnchor/Head
+    path: Front/UpperBody/ArmRAnchor/ArmR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5079,7 +5079,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Left/UpperBody/HeadAnchor/Head
+    path: Front/UpperBody/ArmRAnchor/ArmR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5089,7 +5089,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Left/UpperBody/HeadAnchor/Head
+    path: Front/UpperBody/ArmRAnchor/ArmR
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

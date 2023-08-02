@@ -1,68 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.HeroEditor4D.InventorySystem.Scripts.Data;
+using Mirror;
 using UnityEngine;
-
-public class Survivor : Character
+namespace GamePlay
 {
-    private Decoder currentDecoder;
-
-    // private void OnTriggerEnter2D(Collider2D other) {
-    //     if (currentState.Equals(DecodeState.Instance) && other.GetComponent<Decoder>() != null){
-    //         currentDecoder = other.GetComponent<Decoder>();
-    //         UI_Game.Instance.OpenUI(UIID.UICDecode);
-    //     }
-    // }
-    // private void OnTriggerExit2D(Collider2D other) {
-    //     if (other.GetComponent<Decoder>() != null){
-    //         UI_Game.Instance.CloseUI(UIID.UICDecode);
-    //     }
-    // }
-    private void OnCollisionEnter2D(Collision2D other)
+    public class Survivor : Character
     {
-        if (IngameManager.Instance.GetCharacter() == this && !CurrentState.Equals(DecodeState.Instance))
+        private Decoder currentDecoder;
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            currentDecoder = other.gameObject.GetComponent<Decoder>();
-            if (currentDecoder != null && currentDecoder.status == 0)
+            if (other.CompareTag(Constant.TAG_DECODER) && IngameManager.Instance.Player.index == indexChar && currentDecoder == null)
             {
-                UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveDecode(true, StartDecode);
+                Debug.Log("Trigger decoder");
+                if (!IngameManager.Instance.m_Decoders.ContainsKey(other)){
+                    IngameManager.Instance.m_Decoders.Add(other, other.gameObject.GetComponent<Decoder>());
+                }
+                currentDecoder = IngameManager.Instance.m_Decoders[other];
+                if (currentDecoder != null && currentDecoder.status == 0)
+                {
+                    UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveDecode(true, StartDecode);
+                }
             }
         }
-    }
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (IngameManager.Instance.GetCharacter() == this && currentDecoder != null)
+        private void OnTriggerExit2D(Collider2D other)
         {
-            UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveDecode(false);
+            if (other.CompareTag(Constant.TAG_DECODER) && IngameManager.Instance.Player.index == indexChar && currentDecoder != null)
+            {
+                Debug.Log("Trigger exit decoder");
+                UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveDecode(false);
+                currentDecoder = null;
+            }
+        }
+        private void StartDecode()
+        {
+            ChangeState(DecodeState.Instance);
+        }
+        #region StateMachine
+        // Survivor Decode State
+        public void OnDecodeStart()
+        {
+            if (currentDecoder == null)
+            {
+                ChangeState(IdleState.Instance);
+            }
+        }
+
+        public void AnimDecode()
+        {
+            CharacterControl.AnimationManager.Slash(false);
+        }
+        public void OnDecodeExecute()
+        {
+            if (currentDecoder != null)
+            {
+                IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Decode);
+                currentDecoder.CmdDecodeMachine(IngameManager.Instance.Player.netIdentity, m_CharacterDataConfig.decodeSpeed);
+            }
+            else
+            {
+                ChangeState(IdleState.Instance);
+            }
+        }
+        public virtual void OnDecodeExit()
+        {
             currentDecoder = null;
         }
+        #endregion
     }
-    private void StartDecode()
-    {
-        ChangeState(DecodeState.Instance);
-    }
-    #region StateMachine
-    // Survivor Decode State
-    public virtual void OnDecodeStart()
-    {
-        if (currentDecoder == null)
-        {
-            ChangeState(IdleState.Instance);
-        }
-    }
-    public virtual void OnDecodeExecute()
-    {
-        if (currentDecoder != null)
-        {
-            currentDecoder.CmdDecodeMachine(Time.deltaTime * 100f);
-        }
-        else
-        {
-            ChangeState(IdleState.Instance);
-        }
-    }
-    public virtual void OnDecodeExit()
-    {
-        currentDecoder = null;
-    }
-    #endregion
 }

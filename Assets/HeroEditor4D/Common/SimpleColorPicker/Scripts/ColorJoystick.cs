@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.HeroEditor4D.Common.SimpleColorPicker.Scripts;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Assets.HeroEditor4D.Common.SimpleColorPicker.Scripts
+namespace Assets.HeroEditor4D.Common.Scripts.SimpleColorPicker.Scripts
 {
 	/// <summary>
 	/// Color picker 'joystick' representation.

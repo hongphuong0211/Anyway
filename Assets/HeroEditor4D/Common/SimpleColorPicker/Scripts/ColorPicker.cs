@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Assets.HeroEditor4D.Common.Scripts.SimpleColorPicker.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 

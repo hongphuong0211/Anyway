@@ -21,7 +21,7 @@ namespace Mirror
         public struct PendingPlayer
         {
             public NetworkConnectionToClient conn;
-            public GameObject                roomPlayer;
+            public GameObject roomPlayer;
         }
 
         [Header("Room Settings")]
@@ -118,52 +118,11 @@ namespace Mirror
             }
         }
 
-        public void ReadyStatusChanged()
-        {
-            int CurrentPlayers = 0;
-            int ReadyPlayers = 0;
-
-            foreach (NetworkRoomPlayer item in roomSlots)
-            {
-                if (item != null)
-                {
-                    CurrentPlayers++;
-                    if (item.readyToBegin)
-                        ReadyPlayers++;
-                }
-            }
-
-            if (CurrentPlayers == ReadyPlayers)
-                CheckReadyToBegin();
-            else
-                allPlayersReady = false;
-        }
-
-        /// <summary>
-        /// Called on the server when a client is ready.
-        /// <para>The default implementation of this function calls NetworkServer.SetClientReady() to continue the network setup process.</para>
-        /// </summary>
-        /// <param name="conn">Connection from client.</param>
-        public override void OnServerReady(NetworkConnectionToClient conn)
-        {
-            Debug.Log($"NetworkRoomManager OnServerReady {conn}");
-            base.OnServerReady(conn);
-
-            if (conn != null && conn.identity != null)
-            {
-                GameObject roomPlayer = conn.identity.gameObject;
-
-                // if null or not a room player, don't replace it
-                if (roomPlayer != null && roomPlayer.GetComponent<NetworkRoomPlayer>() != null)
-                    SceneLoadedForPlayer(conn, roomPlayer);
-            }
-        }
-
         void SceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
         {
             Debug.Log($"NetworkRoom SceneLoadedForPlayer scene: {SceneManager.GetActiveScene().path} {conn}");
 
-            if (IsSceneActive(RoomScene))
+            if (Utils.IsSceneActive(RoomScene))
             {
                 // cant be ready in room, add to ready list
                 PendingPlayer pending;
@@ -190,28 +149,6 @@ namespace Mirror
             NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
         }
 
-        /// <summary>
-        /// CheckReadyToBegin checks all of the players in the room to see if their readyToBegin flag is set.
-        /// <para>If all of the players are ready, then the server switches from the RoomScene to the PlayScene, essentially starting the game. This is called automatically in response to NetworkRoomPlayer.CmdChangeReadyState.</para>
-        /// </summary>
-        public void CheckReadyToBegin()
-        {
-            if (!IsSceneActive(RoomScene))
-                return;
-
-            int numberOfReadyPlayers = NetworkServer.connections.Count(conn => conn.Value != null && conn.Value.identity.gameObject.GetComponent<NetworkRoomPlayer>().readyToBegin);
-            bool enoughReadyPlayers = minPlayers <= 0 || numberOfReadyPlayers >= minPlayers;
-            if (enoughReadyPlayers)
-            {
-                pendingPlayers.Clear();
-                allPlayersReady = true;
-            }
-            else
-            {
-                allPlayersReady = false;
-            }
-        }
-
         internal void CallOnClientEnterRoom()
         {
             OnRoomClientEnter();
@@ -232,7 +169,33 @@ namespace Mirror
                 }
         }
 
+        /// <summary>
+        /// CheckReadyToBegin checks all of the players in the room to see if their readyToBegin flag is set.
+        /// <para>If all of the players are ready, then the server switches from the RoomScene to the PlayScene, essentially starting the game. This is called automatically in response to NetworkRoomPlayer.CmdChangeReadyState.</para>
+        /// </summary>
+        public void CheckReadyToBegin()
+        {
+            if (!Utils.IsSceneActive(RoomScene))
+                return;
+
+            int numberOfReadyPlayers = NetworkServer.connections.Count(conn =>
+                conn.Value != null &&
+                conn.Value.identity != null &&
+                conn.Value.identity.TryGetComponent(out NetworkRoomPlayer nrp) &&
+                nrp.readyToBegin);
+
+            bool enoughReadyPlayers = minPlayers <= 0 || numberOfReadyPlayers >= minPlayers;
+            if (enoughReadyPlayers)
+            {
+                pendingPlayers.Clear();
+                allPlayersReady = true;
+            }
+            else
+                allPlayersReady = false;
+        }
+
         #region server handlers
+
         /// <summary>
         /// Called on the server when a new client connects.
         /// <para>Unity calls this on the Server when a Client connects to the Server. Use an override to tell the NetworkManager what to do when a client connects to the server.</para>
@@ -240,15 +203,10 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public override void OnServerConnect(NetworkConnectionToClient conn)
         {
-            if (numPlayers >= maxConnections)
-            {
-                conn.Disconnect();
-                return;
-            }
-
             // cannot join game in progress
-            if (!IsSceneActive(RoomScene))
+            if (!Utils.IsSceneActive(RoomScene))
             {
+                Debug.Log($"Not in Room scene...disconnecting {conn}");
                 conn.Disconnect();
                 return;
             }
@@ -287,7 +245,7 @@ namespace Mirror
                     player.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
             }
 
-            if (IsSceneActive(RoomScene))
+            if (Utils.IsSceneActive(RoomScene))
                 RecalculateRoomPlayerIndices();
 
             OnRoomServerDisconnect(conn);
@@ -303,6 +261,26 @@ namespace Mirror
         public int clientIndex;
 
         /// <summary>
+        /// Called on the server when a client is ready.
+        /// <para>The default implementation of this function calls NetworkServer.SetClientReady() to continue the network setup process.</para>
+        /// </summary>
+        /// <param name="conn">Connection from client.</param>
+        public override void OnServerReady(NetworkConnectionToClient conn)
+        {
+            Debug.Log($"NetworkRoomManager OnServerReady {conn}");
+            base.OnServerReady(conn);
+
+            if (conn != null && conn.identity != null)
+            {
+                GameObject roomPlayer = conn.identity.gameObject;
+
+                // if null or not a room player, don't replace it
+                if (roomPlayer != null && roomPlayer.GetComponent<NetworkRoomPlayer>() != null)
+                    SceneLoadedForPlayer(conn, roomPlayer);
+            }
+        }
+
+        /// <summary>
         /// Called on the server when a client adds a new player with NetworkClient.AddPlayer.
         /// <para>The default implementation for this function creates a new player object from the playerPrefab.</para>
         /// </summary>
@@ -312,11 +290,8 @@ namespace Mirror
             // increment the index before adding the player, so first player starts at 1
             clientIndex++;
 
-            if (IsSceneActive(RoomScene))
+            if (Utils.IsSceneActive(RoomScene))
             {
-                if (roomSlots.Count == maxConnections)
-                    return;
-
                 allPlayersReady = false;
 
                 //Debug.Log("NetworkRoomManager.OnServerAddPlayer playerPrefab: {roomPlayerPrefab.name}");
@@ -328,7 +303,11 @@ namespace Mirror
                 NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
             }
             else
-                OnRoomServerAddPlayer(conn);
+            {
+                // Late joiners not supported...should've been kicked by OnServerDisconnect
+                Debug.Log($"Not in Room scene...disconnecting {conn}");
+                conn.Disconnect();
+            }
         }
 
         [Server]
@@ -438,9 +417,11 @@ namespace Mirror
         {
             OnRoomStopHost();
         }
+
         #endregion
 
         #region client handlers
+
         /// <summary>
         /// This is invoked when the client is started.
         /// </summary>
@@ -493,7 +474,7 @@ namespace Mirror
         /// </summary>
         public override void OnClientSceneChanged()
         {
-            if (IsSceneActive(RoomScene))
+            if (Utils.IsSceneActive(RoomScene))
             {
                 if (NetworkClient.isConnected)
                     CallOnClientEnterRoom();
@@ -504,9 +485,11 @@ namespace Mirror
             base.OnClientSceneChanged();
             OnRoomClientSceneChanged();
         }
+
         #endregion
 
         #region room server virtuals
+
         /// <summary>
         /// This is called on the host when a host is started.
         /// </summary>
@@ -594,6 +577,30 @@ namespace Mirror
         }
 
         /// <summary>
+        /// This is called on server from NetworkRoomPlayer.CmdChangeReadyState when client indicates change in Ready status.
+        /// </summary>
+        public virtual void ReadyStatusChanged()
+        {
+            int CurrentPlayers = 0;
+            int ReadyPlayers = 0;
+
+            foreach (NetworkRoomPlayer item in roomSlots)
+            {
+                if (item != null)
+                {
+                    CurrentPlayers++;
+                    if (item.readyToBegin)
+                        ReadyPlayers++;
+                }
+            }
+
+            if (CurrentPlayers == ReadyPlayers)
+                CheckReadyToBegin();
+            else
+                allPlayersReady = false;
+        }
+
+        /// <summary>
         /// This is called on the server when all the players in the room are ready.
         /// <para>The default implementation of this function uses ServerChangeScene() to switch to the game player scene. By implementing this callback you can customize what happens when all the players in the room are ready, such as adding a countdown or a confirmation for a group leader.</para>
         /// </summary>
@@ -608,9 +615,11 @@ namespace Mirror
         /// <para>May be called multiple times while not ready players are joining</para>
         /// </summary>
         public virtual void OnRoomServerPlayersNotReady() {}
+
         #endregion
 
         #region room client virtuals
+
         /// <summary>
         /// This is a hook to allow custom behaviour when the game client enters the room.
         /// </summary>
@@ -646,14 +655,10 @@ namespace Mirror
         /// </summary>
         public virtual void OnRoomClientSceneChanged() {}
 
-        /// <summary>
-        /// Called on the client when adding a player to the room fails.
-        /// <para>This could be because the room is full, or the connection is not allowed to have more players.</para>
-        /// </summary>
-        public virtual void OnRoomClientAddPlayerFailed() {}
         #endregion
 
         #region optional UI
+
         /// <summary>
         /// virtual so inheriting classes can roll their own
         /// </summary>
@@ -662,7 +667,7 @@ namespace Mirror
             if (!showRoomGUI)
                 return;
 
-            if (NetworkServer.active && IsSceneActive(GameplayScene))
+            if (NetworkServer.active && Utils.IsSceneActive(GameplayScene))
             {
                 GUILayout.BeginArea(new Rect(Screen.width - 150f, 10f, 140f, 30f));
                 if (GUILayout.Button("Return to Room"))
@@ -670,9 +675,10 @@ namespace Mirror
                 GUILayout.EndArea();
             }
 
-            if (IsSceneActive(RoomScene))
+            if (Utils.IsSceneActive(RoomScene))
                 GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
         }
+
         #endregion
     }
 }

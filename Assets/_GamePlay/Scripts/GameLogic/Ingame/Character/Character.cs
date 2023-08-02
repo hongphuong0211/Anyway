@@ -1,31 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.HeroEditor4D.Common.CharacterScripts;
-using HeroEditor4D.Common.Enums;
+using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
+using Assets.HeroEditor4D.Common.Scripts.ExampleScripts;
 using UnityEngine;
-using UnityEngine.AI;
-
+namespace GamePlay{
 public class Character : Creature
 {
+    public int indexChar;
+    public Material m_CharacterMaterial;
+    public FirearmFxExample FirearmFx;
     public const float ATTACK_TIME = 1.8f;
     public const float BUFF_ATTACK_SPEED = 1.5f;
-    public CharacterDataConfig m_CharacterDataConfig;
-    public float m_RotateSpeed = 15;
-    protected BigNumber m_Hp = 100;
+    protected CharacterDataConfig m_CharacterDataConfig;
     protected BigNumber m_Damage;
-    public BigNumber m_Coin;
 
     public float AttackRange => m_Type == CharacterType.SURVIVOR ? 0.4f : 10f;
 
-    public bool IsDeath => m_Hp <= 0;
     protected Vector2 m_InputMovement;
     public CharacterType m_Type;
 
     protected bool IsRunning;
 
     public GameObject highlight;
-
-    CharacterData characterData;
 
     protected IState<Character> currentState;
     public IState<Character> CurrentState
@@ -47,7 +42,6 @@ public class Character : Creature
         {
             currentState.OnExecute(this);
         }
-
     }
 
     public void SetTeam(IngameType id)
@@ -55,9 +49,27 @@ public class Character : Creature
         this.Ingame_ID = id;
     }
 
-    public void SetData(CharacterData characterData)
-    {
-        this.characterData = characterData;
+    public virtual void InitCharacter(CharacterDataConfig characterData) {
+        m_CharacterDataConfig = characterData;
+        m_MaxHP = 100;
+        //m_MaxHP = 100000;
+        m_HP = m_MaxHP;
+        m_Type = characterData.characterType;
+        m_Movement.maxSpeed = characterData.moveSpeed;
+        m_Movement.minSpeed = characterData.minSpeed;
+        m_Movement.moveSpeed = characterData.maxSpeed;
+        GameObject control = Instantiate(Resources.Load<Character4D>("Character/" + (m_Type == CharacterType.SURVIVOR?"Survivor/":"Hunter/") + characterData.name),transform).gameObject;
+        if (control != null)
+        {
+            Destroy(CharacterControl.gameObject);
+            CharacterControl = control.GetComponent<Character4D>();
+            CharacterControl.Parts.ForEach(i =>
+            {
+                i.DefaultMaterial = m_CharacterMaterial;
+                i.Initialize();
+            });
+        }
+        RefreshAllStats();
     }
     public void SetInputMovement(Vector2 movement)
     {
@@ -92,30 +104,22 @@ public class Character : Creature
         }
     }
 
-    public void OnPlay()
+    public void OnHit(Character owner, BigNumber damage, int index)
     {
-    }
-
-    public void OnHit(Character owner, BigNumber damage)
-    {
-        if (!IsDeath)
+        if (!IsDead())
         {
-            TakeDamage(damage);
+            Debug.Log(m_HP + " " + damage.ToString());
+            m_HP -= damage;
+            CharacterControl.AnimationManager.Hit();
+            if (IsDead())
+            {
+                m_HP = 0;
+                Death();
+            }
+            UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).OnChangeStatus(index, -damage.ToFloat());
         }
     }
 
-    public void TakeDamage(BigNumber damage)
-    {
-        Debug.Log(m_Hp + " " + damage.ToString());
-        m_Hp -= damage;
-        CharacterControl.AnimationManager.Hit();
-        if (IsDeath)
-        {
-            m_Hp = 0;
-            Death();
-        }
-
-    }
 
     public void Death()
     {
@@ -163,20 +167,7 @@ public class Character : Creature
     private float m_PauseDetectTime = 0.5f;
     public override void OnRunning()
     {
-        if (IsDeath) return;
-#if UNITY_EDITOR
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            m_Animator.SetBool("IsInCombat", true);
-            m_Animator.SetTrigger("Fire");
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            m_Animator.SetBool("IsInCombat", false);
-            m_Animator.SetTrigger("Fire");
-        }
-#endif
+        if (IsDead()) return;
     }
     // Character Idle State
     public virtual void OnIdleStart()
@@ -204,11 +195,14 @@ public class Character : Creature
     public virtual void OnControlStart() { }
     public virtual void OnControlExecute()
     {
-        if (IsDeath) return;
+        if (IsDead()) return;
         IsRunning = m_InputMovement.x != 0f || m_InputMovement.y != 0f;
         Move();
     }
-    public virtual void OnControlExit() { }
+    public virtual void OnControlExit() {
+        isControling = false;
+        m_Rigidbody.velocity = Vector2.zero;
+    }
     // End Character Control State
     #endregion
 #if UNITY_EDITOR
@@ -228,14 +222,10 @@ public class Character : Creature
     }
 #endif
     public Character4D CharacterControl;
-    private Vector2 curDirection;
+    public bool isControling = false;
 
     public void SetDirection(Vector2 direction)
     {
-        if (direction == curDirection)
-        {
-            return;
-        }
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
             CharacterControl.Parts[0].gameObject.SetActive(false);
@@ -255,9 +245,6 @@ public class Character : Creature
 
     private void Move()
     {
-
-        var direction = m_InputMovement;
-
         if (!IsRunning)
         {
             CharacterControl.AnimationManager.SetState(CharacterState.Idle);
@@ -269,65 +256,5 @@ public class Character : Creature
             m_Rigidbody.velocity = m_InputMovement.normalized * Movement.GetMoveSpeed() * 0.75f;
         }
     }
-
-    private void Actions()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            CharacterControl.AnimationManager.Slash(CharacterControl.WeaponType == WeaponType.Melee2H);
-        }
-        else if (Input.GetKeyDown(KeyCode.J))
-        {
-            CharacterControl.AnimationManager.Jab();
-        }
-        else if (Input.GetKeyDown(KeyCode.F))
-        {
-            CharacterControl.AnimationManager.SecondaryShot();
-        }
-    }
-
-    private void ChangeState()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            CharacterControl.AnimationManager.SetState(CharacterState.Idle);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            CharacterControl.AnimationManager.SetState(CharacterState.Ready);
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            CharacterControl.AnimationManager.SetState(CharacterState.Walk);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            CharacterControl.AnimationManager.SetState(CharacterState.Run);
-        }
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            CharacterControl.AnimationManager.SetState(CharacterState.Jump);
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CharacterControl.AnimationManager.SetState(CharacterState.Climb);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            CharacterControl.AnimationManager.Die();
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            CharacterControl.AnimationManager.Hit();
-        }
-    }
 }
-
-
+}

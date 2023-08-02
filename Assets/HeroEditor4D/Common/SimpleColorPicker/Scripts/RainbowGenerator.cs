@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.HeroEditor4D.Common.SimpleColorPicker.Scripts
+namespace Assets.HeroEditor4D.Common.Scripts.SimpleColorPicker.Scripts
 {
 	/// <summary>
 	/// Generates rainbow for Hue vertical slider.

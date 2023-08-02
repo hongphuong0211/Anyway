@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GamePlay;
 public enum RoomType { WAVE_ROOM = 0, NORMAL_ROOM = 1, BOSS_ROOM = 2 }
 public enum Difficulty { EASY = 0, MID, HARD };
 

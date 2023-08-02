@@ -341,7 +341,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -10}
+        value: {x: 0, y: 0, z: -30}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -659,7 +659,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3232144823
+      path: 611467210
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -673,7 +673,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1450564177
+      path: 1408338557
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -694,98 +694,98 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1734173929
+      path: 1456004457
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1438887657
+      path: 4243230381
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3351821661
+      path: 935310588
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1036484670
+      path: 681162621
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1360788155
+      path: 1077674315
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2870265816
+      path: 1595540170
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1613972483
+      path: 1157977695
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2587654496
+      path: 1512265182
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1387105795
+      path: 4012311963
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2829235040
+      path: 4026598938
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 365067359
+      path: 2310944656
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4067676844
+      path: 4161074233
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 854043300
+      path: 1250329621
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3945987511
+      path: 1637405359
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -2800,7 +2800,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -10
+        value: -30
         inSlope: 0
         outSlope: 0
         tangentMode: 34
@@ -3149,7 +3149,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Back/UpperBody/ArmRAnchor/ArmR/HandR
+    path: Right/UpperBody/ArmRAnchor/ArmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3159,7 +3159,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Back/UpperBody/ArmRAnchor/ArmR/HandR
+    path: Right/UpperBody/ArmRAnchor/ArmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3169,7 +3169,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Back/UpperBody/ArmRAnchor/ArmR/HandR
+    path: Right/UpperBody/ArmRAnchor/ArmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3209,7 +3209,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Right/UpperBody/ArmRAnchor/ArmR/HandR
+    path: Back/UpperBody/ArmRAnchor/ArmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3219,7 +3219,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Right/UpperBody/ArmRAnchor/ArmR/HandR
+    path: Back/UpperBody/ArmRAnchor/ArmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3229,7 +3229,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Right/UpperBody/ArmRAnchor/ArmR/HandR
+    path: Back/UpperBody/ArmRAnchor/ArmR/HandR
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

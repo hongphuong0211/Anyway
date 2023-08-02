@@ -9,13 +9,14 @@ namespace Mirror
 {
     [HelpURL("https://github.com/vis2k/Telepathy/blob/master/README.md")]
     [DisallowMultipleComponent]
-    public class TelepathyTransport : Transport
+    public class TelepathyTransport : Transport, PortTransport
     {
         // scheme used by this transport
         // "tcp4" means tcp with 4 bytes header, network byte order
         public const string Scheme = "tcp4";
 
         public ushort port = 7777;
+        public ushort Port { get => port; set => port=value; }
 
         [Header("Common")]
         [Tooltip("Nagle Algorithm can be disabled by enabling NoDelay")]
@@ -94,7 +95,10 @@ namespace Mirror
             // (= lazy call)
             client.OnConnected = () => OnClientConnected.Invoke();
             client.OnData = (segment) => OnClientDataReceived.Invoke(segment, Channels.Reliable);
-            client.OnDisconnected = () => OnClientDisconnected.Invoke();
+            // fix: https://github.com/vis2k/Mirror/issues/3287
+            // Telepathy may call OnDisconnected twice.
+            // Mirror may have cleared the callback already, so use "?." here.
+            client.OnDisconnected = () => OnClientDisconnected?.Invoke();
 
             // client configuration
             client.NoDelay = NoDelay;

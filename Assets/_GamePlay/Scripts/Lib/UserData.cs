@@ -9,8 +9,8 @@ using System;
 [CreateAssetMenu(fileName = "UserData", menuName = "ScriptableObjects/UserData", order = 1)]
 public class UserData : ScriptableObject
 {
-    public int PlayingLevel = 0;
-
+    public int gold;
+    public int crystal;
     public string Cash;
     public bool removeAds = false;
 
@@ -94,7 +94,8 @@ public class UserData : ScriptableObject
 
     public void OnInitData()
     {
-        PlayingLevel = PlayerPrefs.GetInt(Key_PlayingLevel, 1);
+        gold = PlayerPrefs.GetInt(Key_Gold, 0);
+        crystal = PlayerPrefs.GetInt(Key_Crystal, 0);
         Cash = PlayerPrefs.GetString(Key_Cash, "50");
         musicIsOn = PlayerPrefs.GetInt(Key_MusicIsOn, 1) == 1;
         vibrationIsOn = PlayerPrefs.GetInt(Key_VibrationIsOn, 1) == 1;
@@ -156,6 +157,11 @@ public class UserData : ScriptableObject
 
     public const string Key_Melee_Have_Owned = "Key_Melee_Have_Owned";
     public const string Key_Range_Have_Owned = "Key_Range_Have_Owned";
+    public const string Key_Gold = "Gold";
+    public const string Key_Crystal = "Crystal";
+    public const string Key_Experience = "EXP";
+    public const string Key_Survivor = "Survivor_";
+    public const string Key_Hunter = "Hunter_";
 }
 
 

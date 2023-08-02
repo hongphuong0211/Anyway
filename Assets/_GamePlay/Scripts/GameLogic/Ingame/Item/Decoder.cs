@@ -15,34 +15,49 @@ public enum StatusDecoder
 public class Decoder : NetworkBehaviour
 {
     public UnityAction actionComplete;
-    private List<Color> color = new List<Color>(){new Color(255,255,255,255),  new Color(255,0,0,255), new Color(44,44,44,255)};
+    private List<Color> color = new List<Color>() { new Color(255, 255, 255, 255), new Color(255, 0, 0, 255), new Color(44, 44, 44, 255) };
     [SerializeField] private SpriteRenderer view;
-    [SyncVar (hook = nameof(SetView))]
+    [SyncVar(hook = nameof(SetView))]
     public StatusDecoder status;
     [SerializeField] private Slider progressBar;
-    [SyncVar (hook = nameof(SetBar))]
+    [SyncVar(hook = nameof(SetBar))]
     private float currentProgress = 0;
     private float maxProgress = 100;
+    private bool isDecoded = false;
+    private float efficiency;
 
-    public override void OnStartServer(){
+    private void FixedUpdate()
+    {
+        if (isServerOnly)
+        {
+            if (status == StatusDecoder.open && isDecoded)
+            {
+                if (currentProgress < maxProgress)
+                {
+                    currentProgress += Time.fixedDeltaTime * efficiency;
+                }
+                else
+                {
+                    SetStatus(StatusDecoder.done);
+                    MapManager.Instance.SetNewDecoderDone(this);
+                    Debug.Log("Count Decode: " + MapManager.Instance.decodersDone);
+                }
+                isDecoded = false;
+                efficiency = 0;
+            }
+        }
+    }
+    public override void OnStartServer()
+    {
         view = GetComponent<SpriteRenderer>();
         progressBar.maxValue = maxProgress;
     }
-    [Command(requiresAuthority =false)]
-    public void CmdDecodeMachine(float efficiency){
-        if (status == StatusDecoder.open)
-        {
-            if (currentProgress < maxProgress)
-            {
-                currentProgress += efficiency;
-            }
-            else
-            {
-                SetStatus( StatusDecoder.done);
-                MapManager.Instance.SetNewDecoderDone(this);
-                Debug.Log("Count Decode: " + MapManager.Instance.decodersDone);
-            }
-        }
+    [Command]
+    public void CmdDecodeMachine(NetworkIdentity user, float efficiency)
+    {
+        user.AssignClientAuthority(connectionToClient);
+        isDecoded = true;
+        this.efficiency += efficiency;
     }
 
     // [ClientRpc]
@@ -54,22 +69,29 @@ public class Decoder : NetworkBehaviour
     {
         return (int)(currentProgress / maxProgress * 100f);
     }
-    public void SetBar(float oldVar, float newVar){
+    public void SetBar(float oldVar, float newVar)
+    {
         progressBar.value = newVar;
     }
-    public void SetStatus(StatusDecoder type){
-        if ((int)type == 0){
-            if (currentProgress >= maxProgress){
+    public void SetStatus(StatusDecoder type)
+    {
+        if ((int)type == 0)
+        {
+            if (currentProgress >= maxProgress)
+            {
                 SetStatus(StatusDecoder.done);
                 return;
             }
-        }else if ((int) type == 2){
+        }
+        else if ((int)type == 2)
+        {
             actionComplete?.Invoke();
         }
         this.status = type;
         view.color = color[(int)type];
     }
-    public void SetView(StatusDecoder oldVar, StatusDecoder newVar){
+    public void SetView(StatusDecoder oldVar, StatusDecoder newVar)
+    {
         view.color = color[(int)newVar];
     }
 }

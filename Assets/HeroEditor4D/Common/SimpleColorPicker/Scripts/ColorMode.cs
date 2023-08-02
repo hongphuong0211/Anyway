@@ -1,4 +1,4 @@
-﻿namespace Assets.HeroEditor4D.Common.SimpleColorPicker.Scripts
+﻿namespace Assets.HeroEditor4D.Common.Scripts.SimpleColorPicker.Scripts
 {
 	/// <summary>
 	/// Color mode.

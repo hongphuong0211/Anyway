@@ -1,59 +1,119 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 using UnityEngine;
-
-public class Hunter : Character
+namespace GamePlay
 {
-    private Player currentTarget;
-    private void OnTriggerEnter2D(Collider2D other)
+    public class Hunter : Character
     {
-        if (IngameManager.Instance.GetCharacter() == this && !CurrentState.Equals(AttackState.Instance))
+        private Player currentTarget;
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            currentTarget = other.gameObject.GetComponent<Player>();
-            if (currentTarget != null && currentTarget.Character is Survivor)
+            if (other.CompareTag(Constant.TAG_CHARACTER) && IngameManager.Instance.Player.index == indexChar)
             {
-                UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveAttack(true, Attack);
+                if (currentTarget == null)
+                {
+                    if (!IngameManager.Instance.m_Players.ContainsKey(other))
+                    {
+                        IngameManager.Instance.m_Players.Add(other, other.gameObject.GetComponent<Player>());
+                    }
+                    currentTarget = IngameManager.Instance.m_Players[other];
+                    if (currentTarget != null && currentTarget.Character is Survivor)
+                    {
+                        UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveAttack(true, Attack);
+                    }
+                }
             }
         }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (IngameManager.Instance.GetCharacter() == this && currentTarget != null && currentTarget == other.gameObject.GetComponent<Player>())
+        private void OnTriggerExit2D(Collider2D other)
         {
-            UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveAttack(false);
-            currentTarget = null;
+            if (other.CompareTag(Constant.TAG_CHARACTER) && IngameManager.Instance.Player.index == indexChar && currentTarget != null)
+            {
+                if (!IngameManager.Instance.m_Players.ContainsKey(other))
+                {
+                    IngameManager.Instance.m_Players.Add(other, other.gameObject.GetComponent<Player>());
+                }
+                if (currentTarget == IngameManager.Instance.m_Players[other])
+                {
+                    UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveAttack(false);
+                    currentTarget = null;
+                }
+            }
         }
-    }
-    public void Attack()
-    {
-        Debug.Log("Attack");
-        ChangeState(AttackState.Instance);
-    }
-    #region StateMachine
-    // Hunter Attack State
-    public virtual void OnAttackStart()
-    {
-    }
-    public virtual void OnAttackExecute()
-    {
-        if (currentTarget != null)
+        public void Attack()
         {
-            CharacterControl.AnimationManager.Jab();
-            IngameManager.Instance.Player.CmdMagic(currentTarget, 50);
-            ChangeState(null);
-            currentTarget = null;
-            Invoke(nameof(ResetControl), 3.5f);
+            Debug.Log("Attack");
+            ChangeState(AttackState.Instance);
         }
-        else
+        #region StateMachine
+        // Hunter Attack State
+        public virtual void OnAttackStart()
         {
-            currentTarget = null;
         }
+        public virtual void OnAttackExecute()
+        {
+            if (currentTarget != null)
+            {
+                IngameManager.Instance.Player.CmdChangeAnimation((AnimationPlayer.Attack));
+                IngameManager.Instance.Player.CmdMagic(currentTarget, 50);
+                ChangeState(null);
+                currentTarget = null;
+                Invoke(nameof(ResetControl), 3.5f);
+            }
+            else
+            {
+                currentTarget = null;
+            }
+        }
+
+        public void AnimAttack()
+        {
+            if (CharacterControl.AnimationManager.IsAction) return;
+            Debug.Log(CharacterControl.WeaponType);
+            switch (CharacterControl.WeaponType)
+            {
+                case WeaponType.Melee1H:
+                    CharacterControl.AnimationManager.Slash1H();
+                    break;
+                case  WeaponType.Melee2H:
+                    CharacterControl.AnimationManager.Slash2H();
+                    break;
+                case WeaponType.Crossbow:
+                    Debug.Log("Cross Bow");
+                    CharacterControl.AnimationManager.CrossbowShot();
+                    break;
+                case WeaponType.Firearm1H: 
+                case WeaponType.Firearm2H:
+                {
+                    Debug.Log("Fire Arm");
+                    CharacterControl.AnimationManager.Fire();
+
+                    if (CharacterControl.Parts[0].PrimaryWeapon != null)
+                    {
+                        var firearm = CharacterControl.SpriteCollection.Firearm1H.SingleOrDefault(i => i.Sprites.Contains(CharacterControl.Parts[0].PrimaryWeapon))
+                                      ?? CharacterControl.SpriteCollection.Firearm2H.SingleOrDefault(i => i.Sprites.Contains(CharacterControl.Parts[0].PrimaryWeapon));
+
+                        if (firearm != null)
+                        {
+                            FirearmFx.CreateFireMuzzle(firearm.Name, firearm.Collection);
+                        }
+                    }
+
+                    break;
+                }
+                case WeaponType.Paired:
+                    CharacterControl.AnimationManager.SecondaryShot();
+                    break;
+            }
+        }
+        public virtual void OnAttackExit()
+        {
+        }
+        private void ResetControl()
+        {
+            ChangeState(ControlState.Instance);
+        }
+        #endregion
     }
-    public virtual void OnAttackExit()
-    {
-    }
-    private void ResetControl(){
-        ChangeState(ControlState.Instance);
-    }
-    #endregion
 }

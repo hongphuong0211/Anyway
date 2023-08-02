@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AttackState : Singleton<AttackState>, IState<Character>
+namespace GamePlay
 {
-    public void OnEnter(Character t)
+    public class AttackState : Singleton<AttackState>, IState<Character>
     {
-        ((Hunter) t).OnAttackStart();
-    }
+        public void OnEnter(Character t)
+        {
+            ((Hunter)t).OnAttackStart();
+        }
 
-    public void OnExecute(Character t)
-    {
-        ((Hunter) t).OnAttackExecute();
-    }
+        public void OnExecute(Character t)
+        {
+            ((Hunter)t).OnAttackExecute();
+        }
 
-    public void OnExit(Character t)
-    {
-        ((Hunter) t).OnAttackExit();
+        public void OnExit(Character t)
+        {
+            ((Hunter)t).OnAttackExit();
+        }
     }
 }

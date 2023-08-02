@@ -16,4 +16,7 @@ public class Constant
     public static readonly float HIGH = 30f;
     public static readonly float RANGE = 60f;
 
+    public static readonly string TAG_DECODER = "Decoder";
+    public static readonly string TAG_CHARACTER = "Character";
+
 }

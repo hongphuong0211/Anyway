@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ControlState : Singleton<ControlState>, IState<Character>
+namespace GamePlay
 {
-    public void OnEnter(Character t)
+    public class ControlState : Singleton<ControlState>, IState<Character>
     {
-        //t.OnChangeAnim(Constant.ANIM_CONTROL);
-        t.OnControlStart();
-    }
+        public void OnEnter(Character t)
+        {
+            //t.OnChangeAnim(Constant.ANIM_CONTROL);
+            t.OnControlStart();
+        }
 
-    public void OnExecute(Character t)
-    {
-        t.OnControlExecute();
-    }
+        public void OnExecute(Character t)
+        {
+            t.OnControlExecute();
+        }
 
-    public void OnExit(Character t)
-    {
-        t.OnControlExit();
+        public void OnExit(Character t)
+        {
+            t.OnControlExit();
+        }
     }
 }

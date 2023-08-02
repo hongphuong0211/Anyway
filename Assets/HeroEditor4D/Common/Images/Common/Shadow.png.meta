@@ -11,6 +11,27 @@ TextureImporter:
   - first:
       213: 21300004
     second: HandL
+  - first:
+      213: -2912605832241475739
+    second: Torso
+  - first:
+      213: 624974917677838921
+    second: ArmR
+  - first:
+      213: -4550084578846169200
+    second: ArmL
+  - first:
+      213: -5036632884329809443
+    second: Pelvis
+  - first:
+      213: 9212712091511837395
+    second: ForearmR
+  - first:
+      213: 8477010410430503746
+    second: ForearmL
+  - first:
+      213: 9055856234324719921
+    second: HandR
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -164,7 +185,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -2912605832241475739
+      internalID: 0
       vertices: []
       indices: 
       edges: []
@@ -185,7 +206,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 624974917677838921
+      internalID: 0
       vertices: []
       indices: 
       edges: []
@@ -206,7 +227,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -4550084578846169200
+      internalID: 0
       vertices: []
       indices: 
       edges: []
@@ -227,7 +248,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -5036632884329809443
+      internalID: 0
       vertices: []
       indices: 
       edges: []
@@ -248,7 +269,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 9212712091511837395
+      internalID: 0
       vertices: []
       indices: 
       edges: []
@@ -269,7 +290,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8477010410430503746
+      internalID: 0
       vertices: []
       indices: 
       edges: []
@@ -353,7 +374,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 9055856234324719921
+      internalID: 0
       vertices: []
       indices: 
       edges: []

@@ -23,7 +23,9 @@ public enum UIID
     UICClaim = 11,
     UICFreeCharacter = 12,
     UICDecode = 13,
-    UICRoom = 14
+    UICRoom = 14,
+    UICMatch = 15,
+    UICPopup = 16,
 }
 
 

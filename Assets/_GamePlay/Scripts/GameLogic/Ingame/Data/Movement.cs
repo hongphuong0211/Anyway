@@ -9,7 +9,6 @@ public struct Movement {
     public float maxSpeed;
     public float slowRate;
     public float increaseRate;
-    public float accel;
     public float bonusSpeed;
     public void Init(float moveSpeed, float maxSpeed,float minSpeed, float accel) {
         this.moveSpeed = moveSpeed;
@@ -17,7 +16,7 @@ public struct Movement {
         this.maxSpeed = maxSpeed;
         this.slowRate = 0;
         this.increaseRate = 0;
-        this.accel = 0;
+        this.bonusSpeed = 0;
     }
     public float GetMoveSpeed() {
         if (slowRate > 0 || bonusSpeed > 0) {
