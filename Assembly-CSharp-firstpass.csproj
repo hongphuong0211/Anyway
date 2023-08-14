@@ -737,14 +737,113 @@
      <Reference Include="mscorlib">
      <HintPath>/home/phuong/Unity/2021.3.26f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.InternalAPIEngineBridge.001">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Notifications">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Notifications.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.CloudSave.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.CloudSave.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.IK.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Path.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.CloudSave">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.CloudSave.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Notifications.iOS">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Notifications.iOS.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.Authentication">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Authentication.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.IK.Runtime">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.AdaptivePerformance">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Common.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Tilemap.Extras">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Animation.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder.AddOns.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Core.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Toolchain.Linux-x86_64">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Subsystem.Registration">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.Core.Analytics">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Shared.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.Core.Environments">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Core.Environments.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Animation.Runtime">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Common.Runtime">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.AdaptivePerformance.Profiler.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.SpriteShape.Runtime">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.SysrootPackage.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.AdaptivePerformance.Samsung.Android">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Samsung.Android.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.InternalAPIEngineBridge.001">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.PixelPerfect">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
@@ -764,14 +863,8 @@
      <Reference Include="Unity.VisualScripting.State.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Services.CloudSave.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.CloudSave.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Searcher.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -779,50 +872,20 @@
      <Reference Include="Unity.ProBuilder">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Path.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.Authentication">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Authentication.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Runtime">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.CloudSave">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.CloudSave.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Notifications.iOS">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Notifications.iOS.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.AdaptivePerformance.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Mathematics.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.AdaptivePerformance">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.dll</HintPath>
+     <Reference Include="Unity.Services.Leaderboards.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Leaderboards.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Notifications.Android">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Notifications.Android.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Common.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualScripting.Flow.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Tilemap.Extras">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ProBuilder.AddOns.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+     <Reference Include="Unity.Services.Leaderboards">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Leaderboards.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualStudio.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
@@ -836,15 +899,6 @@
      <Reference Include="Unity.Timeline">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.TextMeshPro">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Core.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Burst.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
      </Reference>
@@ -854,20 +908,8 @@
      <Reference Include="Unity.InternalAPIEditorBridge.001">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Toolchain.Linux-x86_64">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Subsystem.Registration">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ProBuilder.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.AdaptivePerformance.UI.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.UI.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
@@ -881,68 +923,68 @@
      <Reference Include="Unity.VisualScripting.Core">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Mathematics">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.Core.Analytics">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Burst">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Shared.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.Core.Environments">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Services.Core.Environments.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Runtime">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.PixelPerfect.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Mobile.AndroidLogcat.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.2D.PixelPerfect.Editor">
+     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Common.Runtime">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.SpriteShape.Editor">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.AdaptivePerformance.Profiler.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.AdaptivePerformance.Simulator.VRR.Extension">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.VRR.Extension.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.SpriteShape.Runtime">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualScripting.State">
      <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.SysrootPackage.Editor">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.AdaptivePerformance.Samsung.Android">
-     <HintPath>/home/phuong/UnityProject/Anyway/Library/ScriptAssemblies/Unity.AdaptivePerformance.Samsung.Android.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="kcp2k.csproj">
       <Project>{317db052-759b-ad3a-0a77-a3b468939680}</Project>
       <Name>kcp2k</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
+      <Project>{c3099fe5-05aa-f39b-3108-f2442d2425aa}</Project>
+      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj">
+      <Project>{30aaf810-b678-90a8-bb6b-70f4048c5baa}</Project>
+      <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
+      <Project>{c1449cf4-d3b7-c404-dfdb-ef38834b9e8f}</Project>
+      <Name>Unity.ShaderGraph.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Mirror.Editor.csproj">
+      <Project>{54fb769b-4486-9817-add0-d13d2253303d}</Project>
+      <Name>Mirror.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Telepathy.csproj">
+      <Project>{7f3aec1a-af0b-e55a-b68e-afcf9bf3008f}</Project>
+      <Name>Telepathy</Name>
+    </ProjectReference>
+    <ProjectReference Include="where-allocations.csproj">
+      <Project>{ff1ef8f8-7aa9-11d0-7dd1-5a5eaadcbea3}</Project>
+      <Name>where-allocations</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
+      <Project>{dff6c434-e23b-b603-015b-cde497e53407}</Project>
+      <Name>Unity.RenderPipelines.Core.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="ParrelSync.csproj">
+      <Project>{616f0366-ea33-d5e0-6d52-72fb7a167124}</Project>
+      <Name>ParrelSync</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
+      <Project>{dd535723-8024-8214-6ab8-d51c1c5a5cb5}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
       <Project>{d7298f12-495f-4797-62ac-e65c0035fd1c}</Project>
@@ -956,37 +998,21 @@
       <Project>{0cc692a3-0d23-4529-0cd1-75a2846db55f}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
-      <Project>{c3099fe5-05aa-f39b-3108-f2442d2425aa}</Project>
-      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
+    <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
+      <Project>{f7b24bc0-b504-c7d7-4c4d-6da0ee587eab}</Project>
+      <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{d8b10858-ed52-7050-c575-8048810b3fe5}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
-      <Project>{f7b24bc0-b504-c7d7-4c4d-6da0ee587eab}</Project>
-      <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj">
-      <Project>{30aaf810-b678-90a8-bb6b-70f4048c5baa}</Project>
-      <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Mirror.Transports.csproj">
       <Project>{3edcb200-cd2b-fd62-7c39-774965edf398}</Project>
       <Name>Mirror.Transports</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{c1449cf4-d3b7-c404-dfdb-ef38834b9e8f}</Project>
-      <Name>Unity.ShaderGraph.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
       <Project>{cf98d82b-c0ba-2950-01e4-3d9541168f0a}</Project>
       <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.Editor.csproj">
-      <Project>{54fb769b-4486-9817-add0-d13d2253303d}</Project>
-      <Name>Mirror.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.CompilerSymbols.csproj">
       <Project>{9e8e0dc5-0853-3227-4d42-3bd3812c2169}</Project>
@@ -995,14 +1021,6 @@
     <ProjectReference Include="Mirror.Authenticators.csproj">
       <Project>{b258721b-1716-503b-80e3-ee1aae1050be}</Project>
       <Name>Mirror.Authenticators</Name>
-    </ProjectReference>
-    <ProjectReference Include="Telepathy.csproj">
-      <Project>{7f3aec1a-af0b-e55a-b68e-afcf9bf3008f}</Project>
-      <Name>Telepathy</Name>
-    </ProjectReference>
-    <ProjectReference Include="where-allocations.csproj">
-      <Project>{ff1ef8f8-7aa9-11d0-7dd1-5a5eaadcbea3}</Project>
-      <Name>where-allocations</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Components.csproj">
       <Project>{fbb47aa6-1f3b-8366-f390-ed2262256087}</Project>
@@ -1036,21 +1054,9 @@
       <Project>{0404ecc6-41f2-568b-0596-962153d2a7b9}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
-      <Project>{dff6c434-e23b-b603-015b-cde497e53407}</Project>
-      <Name>Unity.RenderPipelines.Core.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="ParrelSync.csproj">
-      <Project>{616f0366-ea33-d5e0-6d52-72fb7a167124}</Project>
-      <Name>ParrelSync</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
       <Project>{f89be432-6a9f-b342-bdf6-32c1f7f29899}</Project>
       <Name>Unity.RenderPipelines.Universal.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
-      <Project>{dd535723-8024-8214-6ab8-d51c1c5a5cb5}</Project>
-      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="MultiplexTransport.csproj">
       <Project>{2d8e90aa-0f16-0252-cf9c-d04fd02bbee8}</Project>

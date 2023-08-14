@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1cb3ec890e027ece",
         "name": "com.abi.anyway",
-        "processId": 1946,
+        "processId": 27011,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,37 +11,43 @@
         {
             "deviceId": "1cb3ec890e027ece",
             "name": "com.abi.anyway",
-            "processId": 1358,
+            "processId": 12897,
+            "exited": true
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.abi.anyway",
+            "processId": 10296,
+            "exited": true
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.abi.anyway",
+            "processId": 14717,
+            "exited": true
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.abi.anyway",
+            "processId": 24764,
+            "exited": true
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.google.android.gm",
+            "processId": 14936,
             "exited": false
         },
         {
             "deviceId": "1cb3ec890e027ece",
             "name": "com.abi.anyway",
-            "processId": 8016,
+            "processId": 24956,
             "exited": false
         },
         {
             "deviceId": "1cb3ec890e027ece",
             "name": "com.abi.anyway",
-            "processId": 8610,
-            "exited": false
-        },
-        {
-            "deviceId": "1cb3ec890e027ece",
-            "name": "com.abi.anyway",
-            "processId": 15138,
-            "exited": false
-        },
-        {
-            "deviceId": "1cb3ec890e027ece",
-            "name": "com.abi.anyway",
-            "processId": 6982,
-            "exited": false
-        },
-        {
-            "deviceId": "1cb3ec890e027ece",
-            "name": "com.abi.anyway",
-            "processId": 1946,
+            "processId": 27011,
             "exited": false
         }
     ],

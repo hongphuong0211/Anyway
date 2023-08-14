@@ -51,7 +51,8 @@ namespace GamePlay
             }
         }
         public void OnChangeStatus(int index, float hp){
-            if (index > 0 && index <= m_StateUser.Length ){
+            if (index > 0 && index <= m_StateUser.Length)
+            {
                 m_StateUser[index - 1].ChangeState(hp);
             }
         }

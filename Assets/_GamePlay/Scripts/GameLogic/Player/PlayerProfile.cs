@@ -40,7 +40,7 @@ public class PlayerProfile
         
     }
 
-    public void SaveDataToLocal(bool isCheckCooldown)
+    public void SaveDataToLocal(bool isCheckCooldown = false)
     {
         if (isCheckCooldown)
         {

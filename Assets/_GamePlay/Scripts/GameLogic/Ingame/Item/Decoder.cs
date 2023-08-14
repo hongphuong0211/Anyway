@@ -21,16 +21,17 @@ public class Decoder : NetworkBehaviour
     public StatusDecoder status;
     [SerializeField] private Slider progressBar;
     [SyncVar(hook = nameof(SetBar))]
-    private float currentProgress = 0;
+    [SerializeField]private float currentProgress = 0;
     private float maxProgress = 100;
     private bool isDecoded = false;
+    [SyncVar]
     private float efficiency;
 
     private void FixedUpdate()
     {
-        if (isServerOnly)
+        if (isServer)
         {
-            if (status == StatusDecoder.open && isDecoded)
+            if (status == StatusDecoder.open && isDecoded && efficiency > 0)
             {
                 if (currentProgress < maxProgress)
                 {
@@ -45,6 +46,11 @@ public class Decoder : NetworkBehaviour
                 isDecoded = false;
                 efficiency = 0;
             }
+            else
+            {
+                isDecoded = false;
+                efficiency = 0;
+            }
         }
     }
     public override void OnStartServer()
@@ -52,12 +58,13 @@ public class Decoder : NetworkBehaviour
         view = GetComponent<SpriteRenderer>();
         progressBar.maxValue = maxProgress;
     }
-    [Command]
-    public void CmdDecodeMachine(NetworkIdentity user, float efficiency)
+    [Command(requiresAuthority = false)]
+    public void CmdDecodeMachine(NetworkIdentity user, float eff)
     {
-        user.AssignClientAuthority(connectionToClient);
+        Debug.Log(("user decode"));
+        //user.AssignClientAuthority(connectionToClient);
         isDecoded = true;
-        this.efficiency += efficiency;
+        this.efficiency += eff;
     }
 
     // [ClientRpc]

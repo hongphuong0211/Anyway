@@ -35,7 +35,6 @@ public class Character : Creature
         }
     }
 
-
     public virtual void Update()
     {
         if (currentState != null)
@@ -115,6 +114,8 @@ public class Character : Creature
             {
                 m_HP = 0;
                 Death();
+                IngameManager.Instance.m_PlayerDie++;
+                IngameManager.Instance.EndGame();
             }
             UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).OnChangeStatus(index, -damage.ToFloat());
         }

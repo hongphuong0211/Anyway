@@ -29,6 +29,8 @@ namespace GamePlay
         [HideInInspector]
         public float m_MapTopY, m_MapBottomY, m_MapMinX, m_MapMaxX;
         public int m_CharLevel;
+        public int m_PlayerOut = 0;
+        public int m_PlayerDie = 0;
         private void Update()
         {
             if (!IsPause)
@@ -39,6 +41,7 @@ namespace GamePlay
                 FPSCounting();
             }
         }
+        
         private void ResetCountingFPS()
         {
             m_FPSAverage10s.Clear();
@@ -88,6 +91,34 @@ namespace GamePlay
             Vector3 spawnPos = new Vector3(0, 0.05f, 0);
             m_Player.InitCharacter(selectedCharID,
                                            spawnPos);
+        }
+
+        public void EndGame()
+        {
+            if (m_PlayerDie + m_PlayerOut >= MyNetworkManager.Instance.maxConnections - 1)
+            {
+                int result = 0;
+                if (Player.Character.m_Type == CharacterType.SURVIVOR)
+                {
+                    result = m_PlayerOut > m_PlayerDie?1:m_PlayerOut == m_PlayerDie?0:-1;
+                }
+                else
+                {
+                    result = m_PlayerDie > m_PlayerOut?1:m_PlayerOut == m_PlayerDie?0:-1;;
+                }
+
+                UI_Game.Instance.CloseUI(UIID.UICGamePlay);
+                UICResult resultCanvas = UI_Game.Instance.OpenUI<UICResult>(UIID.UICEndGame);
+                resultCanvas.SetUp(result, new int[4] { 20, 300, 1, result * 400 + 200 },
+                    new string[5] { "Hells", "kaks", "sid", "sd", "aoos" },
+                    new int[5] { 3000, 1200, 1023, 1332, 4122 });
+                ProfileManager.MyProfile.exp += 20;
+                GameManager.Instance.m_UserData.SetIntData(UserData.Key_Gold, ref GameManager.Instance.m_UserData.gold, 300);
+                GameManager.Instance.m_UserData.SetIntData(UserData.Key_Crystal, ref GameManager.Instance.m_UserData.crystal, 1);
+                CloudCodeManager.Instance.AddScore(result * 400 + 200);
+                ProfileManager.MyProfile.SaveDataToLocal();
+                IsEndGame = true;
+            }
         }
         public void InitLevel(int level, int world)
         {

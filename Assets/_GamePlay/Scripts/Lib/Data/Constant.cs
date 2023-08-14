@@ -18,5 +18,5 @@ public class Constant
 
     public static readonly string TAG_DECODER = "Decoder";
     public static readonly string TAG_CHARACTER = "Character";
-
+    public static readonly string TAG_GATE = "Gate";
 }

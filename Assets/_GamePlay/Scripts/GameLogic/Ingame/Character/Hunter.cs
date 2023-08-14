@@ -55,7 +55,7 @@ namespace GamePlay
         {
             if (currentTarget != null)
             {
-                IngameManager.Instance.Player.CmdChangeAnimation((AnimationPlayer.Attack));
+                //IngameManager.Instance.Player.CmdChangeAnimation((AnimationPlayer.Attack));
                 IngameManager.Instance.Player.CmdMagic(currentTarget, 50);
                 ChangeState(null);
                 currentTarget = null;
@@ -70,40 +70,34 @@ namespace GamePlay
         public void AnimAttack()
         {
             if (CharacterControl.AnimationManager.IsAction) return;
+            
             Debug.Log(CharacterControl.WeaponType);
             switch (CharacterControl.WeaponType)
             {
                 case WeaponType.Melee1H:
-                    CharacterControl.AnimationManager.Slash1H();
+                    IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Slash1H);
+                    //CharacterControl.AnimationManager.Slash1H();
                     break;
                 case  WeaponType.Melee2H:
-                    CharacterControl.AnimationManager.Slash2H();
+                    IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Slash2H);
+                    //CharacterControl.AnimationManager.Slash2H();
                     break;
                 case WeaponType.Crossbow:
                     Debug.Log("Cross Bow");
-                    CharacterControl.AnimationManager.CrossbowShot();
+                    IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.CrossbowShot);
+                    //CharacterControl.AnimationManager.CrossbowShot();
                     break;
                 case WeaponType.Firearm1H: 
                 case WeaponType.Firearm2H:
                 {
                     Debug.Log("Fire Arm");
-                    CharacterControl.AnimationManager.Fire();
-
-                    if (CharacterControl.Parts[0].PrimaryWeapon != null)
-                    {
-                        var firearm = CharacterControl.SpriteCollection.Firearm1H.SingleOrDefault(i => i.Sprites.Contains(CharacterControl.Parts[0].PrimaryWeapon))
-                                      ?? CharacterControl.SpriteCollection.Firearm2H.SingleOrDefault(i => i.Sprites.Contains(CharacterControl.Parts[0].PrimaryWeapon));
-
-                        if (firearm != null)
-                        {
-                            FirearmFx.CreateFireMuzzle(firearm.Name, firearm.Collection);
-                        }
-                    }
-
+                    IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Fire);
+                    //CharacterControl.AnimationManager.Fire();
                     break;
                 }
                 case WeaponType.Paired:
-                    CharacterControl.AnimationManager.SecondaryShot();
+                    IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.SecondaryShot);
+                    //CharacterControl.AnimationManager.SecondaryShot();
                     break;
             }
         }

@@ -8,6 +8,7 @@ TagManager:
   - Decoder
   - MinimapCamera
   - Character
+  - Gate
   layers:
   - Default
   - TransparentFX

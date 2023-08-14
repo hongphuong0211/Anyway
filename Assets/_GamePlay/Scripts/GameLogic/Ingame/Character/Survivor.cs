@@ -8,6 +8,7 @@ namespace GamePlay
     public class Survivor : Character
     {
         private Decoder currentDecoder;
+        public bool outRoom { get; private set; }
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag(Constant.TAG_DECODER) && IngameManager.Instance.Player.index == indexChar && currentDecoder == null)
@@ -21,6 +22,10 @@ namespace GamePlay
                 {
                     UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveDecode(true, StartDecode);
                 }
+            }else if (other.CompareTag(Constant.TAG_GATE))
+            {
+                IngameManager.Instance.m_PlayerOut++;
+                IngameManager.Instance.EndGame();
             }
         }
         private void OnTriggerExit2D(Collider2D other)
@@ -34,6 +39,7 @@ namespace GamePlay
         }
         private void StartDecode()
         {
+            Debug.Log("Start Decode");
             ChangeState(DecodeState.Instance);
         }
         #region StateMachine
@@ -54,8 +60,8 @@ namespace GamePlay
         {
             if (currentDecoder != null)
             {
-                IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Decode);
-                currentDecoder.CmdDecodeMachine(IngameManager.Instance.Player.netIdentity, m_CharacterDataConfig.decodeSpeed);
+                //IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Decode);
+                currentDecoder.CmdDecodeMachine(IngameManager.Instance.Player.netIdentity, 10);
             }
             else
             {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.HeroEditor4D.Common.Scripts.Common;
 using UnityEngine;
 using Mirror;
 using Assets.HeroEditor4D.InventorySystem.Scripts.Elements;
@@ -15,6 +16,7 @@ namespace GamePlay
             slot.transform.SetParent(room.roomView);
             slot.transform.localPosition -= Vector3.forward * slot.transform.localPosition.z;
             slot.transform.localScale = Vector3.one;
+            slot.gameObject.SetActive(true);
             if (this.isLocalPlayer)
             {
                 room.roomPlayer = this;
@@ -23,6 +25,13 @@ namespace GamePlay
         public override void OnClientExitRoom()
         {
             base.OnClientExitRoom();
+            UICRoom room = UI_Game.Instance.GetUI<UICRoom>(UIID.UICRoom);
+            slot.transform.SetParent(null);
+            slot.gameObject.SetActive(false);
+            if (this.isLocalPlayer)
+            {
+                room.roomPlayer = this;
+            }
         }
         public override void ReadyStateChanged(bool oldReadyState, bool newReadyState)
         {

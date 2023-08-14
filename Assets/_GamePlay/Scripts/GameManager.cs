@@ -37,7 +37,7 @@ namespace GamePlay
         protected override void Awake()
         {
             base.Awake();
-            Input.multiTouchEnabled = false;
+           // Input.multiTouchEnabled = false;
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -87,15 +87,18 @@ namespace GamePlay
         //}
         #region Connect
         bool isFinding = false;
+        private bool isHost = false;
         public void StartHost()
         {
             isFinding = false;
             discoveredServers.Clear();
             MyNetworkManager.Instance.StartHost();
+            isHost = true;
             networkDiscovery.AdvertiseServer();
         }
         public void FindRoom()
         {
+            isHost = false;
             isFinding = true;
             discoveredServers.Clear();
             networkDiscovery.StartDiscovery();
@@ -105,6 +108,14 @@ namespace GamePlay
             isFinding = false;
             discoveredServers.Clear();
             networkDiscovery.StopDiscovery();
+            if (!isHost)
+            {
+                MyNetworkManager.Instance.StopClient();
+            }
+            else
+            {
+                MyNetworkManager.Instance.StopHost();
+            }
         }
         void Connect(ServerResponse info)
         {

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using GamePlay;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +23,7 @@ public class ProfileManager : Singleton<ProfileManager> {
     }
     public void InitProfile() {
         CreateOrLoadLocalProfile();
+        CloudCodeManager.Instance.AddScore(0);
     }
     private void CreateNewPlayer() {
         m_LocalProfile = new PlayerProfile();

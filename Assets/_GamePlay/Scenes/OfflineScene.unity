@@ -207,8 +207,8 @@ MonoBehaviour:
   offlineScene: Assets/_GamePlay/Scenes/OfflineScene.unity
   onlineScene: Assets/_GamePlay/Scenes/Room.unity
   transport: {fileID: 13110570}
-  networkAddress: 0.0.0.0
-  maxConnections: 2
+  networkAddress: localhost
+  maxConnections: 5
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 7545203196549828793, guid: 29b1cef576ac27a4dbca3163ba48f33f, type: 3}
   autoCreatePlayer: 1

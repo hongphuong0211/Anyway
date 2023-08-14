@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 using UnityEngine;
 using Mirror;
 namespace GamePlay
 {
     public enum AnimationPlayer
     {
-        Decode,
-        Attack
+        Idle,
+        Hit, Die, Run,
+        Slash1H,
+        Slash2H,
+        CrossbowShot,
+        Fire, SecondaryShot,
+        Slash
     }
     public class Player : NetworkBehaviour
     {
@@ -19,10 +26,13 @@ namespace GamePlay
         public Vector2 Direction;
         [SyncVar]
         public CharacterDataConfig characterData;
+
+        [SyncVar(hook = nameof(SetCharacterAnim))] private int AnimationPlayer;
         [SerializeField] Hunter hunterController;
         [SerializeField] Survivor survivorController;
         [SerializeField] AudioSource footstep;
         protected Character m_Character;
+        
         public Character Character
         {
             get
@@ -147,18 +157,58 @@ namespace GamePlay
             // This will appear on the opponent's client, not the attacking player's
             Debug.Log($"Magic Damage = {damage}!" + "Player Index: " + index );
             target.Character.OnHit(owner.Character, damage, target.index);
+            IngameManager.Instance.EndGame();
         }
 
         [Command]
         public void CmdChangeAnimation(AnimationPlayer typeAnim)
         {
-            switch (typeAnim)
+            AnimationPlayer = (int)typeAnim;
+        }
+        
+        private void SetCharacterAnim(int oldVar, int newVar)
+        {
+            switch ((AnimationPlayer) newVar)
             {
-                case AnimationPlayer.Decode:
-                    ((Survivor)m_Character).AnimDecode();
+                case GamePlay.AnimationPlayer.Idle:
+                    m_Character.CharacterControl.AnimationManager.SetState(CharacterState.Idle);
                     break;
-                case AnimationPlayer.Attack:
-                    ((Hunter)m_Character).AnimAttack();
+                case GamePlay.AnimationPlayer.Die:
+                    m_Character.CharacterControl.AnimationManager.Die();
+                    break;
+                case GamePlay.AnimationPlayer.Hit:
+                    m_Character.CharacterControl.AnimationManager.Hit();
+                    break;
+                case GamePlay.AnimationPlayer.Run:
+                    m_Character.CharacterControl.AnimationManager.SetState(CharacterState.Run);
+                    break;
+                case GamePlay.AnimationPlayer.Slash1H:
+                    m_Character.CharacterControl.AnimationManager.Slash1H();
+                    break;
+                case GamePlay.AnimationPlayer.Slash2H:
+                    m_Character.CharacterControl.AnimationManager.Slash2H();
+                    break;
+                case GamePlay.AnimationPlayer.CrossbowShot:
+                    m_Character.CharacterControl.AnimationManager.CrossbowShot();
+                    break;
+                case GamePlay.AnimationPlayer.Fire:
+                    m_Character.CharacterControl.AnimationManager.Fire();
+                    if (m_Character.CharacterControl.Parts[0].PrimaryWeapon != null)
+                    {
+                        var firearm = m_Character.CharacterControl.SpriteCollection.Firearm1H.SingleOrDefault(i => i.Sprites.Contains(m_Character.CharacterControl.Parts[0].PrimaryWeapon))
+                                      ?? m_Character.CharacterControl.SpriteCollection.Firearm2H.SingleOrDefault(i => i.Sprites.Contains(m_Character.CharacterControl.Parts[0].PrimaryWeapon));
+
+                        if (firearm != null)
+                        {
+                            m_Character.FirearmFx.CreateFireMuzzle(firearm.Name, firearm.Collection);
+                        }
+                    }
+                    break;
+                case GamePlay.AnimationPlayer.SecondaryShot:
+                    m_Character.CharacterControl.AnimationManager.SecondaryShot();
+                    break;
+                case GamePlay.AnimationPlayer.Slash:
+                    m_Character.CharacterControl.AnimationManager.Slash(false);
                     break;
             }
         }

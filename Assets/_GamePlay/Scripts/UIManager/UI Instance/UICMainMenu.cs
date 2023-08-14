@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 namespace GamePlay
 {
@@ -23,29 +24,38 @@ namespace GamePlay
             m_TextCrystal.SetText(new BigNumber(GameManager.Instance.m_UserData.crystal).ToString3());
             m_SliderExperience.value = (float)ProfileManager.MyProfile.exp / (float)AttributeManager.Instance.m_ExperienceData[Mathf.Min(ProfileManager.MyProfile.lv - 1, AttributeManager.Instance.m_ExperienceData.Count - 1)];
         }
-        public void StartHost()
-        {
-            GameManager.Instance.StartHost();
-        }
-        public void FindRoom()
-        {
-            GameManager.Instance.FindRoom();
-            UI_Game.Instance.OpenUI(UIID.UICMatch);
-        }
+        
         public void ChangeView(int index){
             if (index > -1 && index < m_Menu.Count){
                 if (m_Menu[index].m_Object != null && m_Menu[index].m_State){
                     if (m_CurrentMenu > -1 && m_CurrentMenu < m_Menu.Count && m_Menu[m_CurrentMenu].m_Object != null)
-                        m_Menu[m_CurrentMenu].m_Object.SetActive(false);
+                        m_Menu[m_CurrentMenu].m_Object.gameObject.SetActive(false);
                     m_CurrentMenu = index;
-                    m_Menu[m_CurrentMenu].m_Object.SetActive(true);
+                    m_Menu[m_CurrentMenu].m_Object.gameObject.SetActive(true);
                 }
             }
         }
+
+        public T GetMenuView<T>(int index) where T : MenuView
+        {
+            if (index > -1 && index < m_Menu.Count){
+                if (m_Menu[index].m_Object != null && m_Menu[index].m_Object is T)
+                {
+                    return (T)m_Menu[index].m_Object;
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public class MenuView : MonoBehaviour
+    {
+        
     }
     [Serializable]
     public class MenuItem{
-        public GameObject m_Object = null;
+        public MenuView m_Object = null;
         public bool m_State = false;
     }
 }

@@ -13,25 +13,32 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             if (m_Instance == null)
             {
                 // Find singleton
-                m_Instance = FindObjectOfType<T>();
-
-                // Create new instance if one doesn't already exist.
-                if (m_Instance == null)
+                T[] ListInstance = FindObjectsOfType<T>();
+                if (ListInstance.Length > 1)
+                {
+                    for (int i = ListInstance.Length; i > 0; i--)
+                    {
+                        Destroy(ListInstance[i]);
+                    }
+                }
+                if (ListInstance.Length == 0)
                 {
                     // Need to create a new GameObject to attach the singleton to.
                     var singletonObject = new GameObject();
                     m_Instance = singletonObject.AddComponent<T>();
                     singletonObject.name = typeof(T).ToString() + " (Singleton)";
-
                 }
-
+                else
+                {
+                    m_Instance = ListInstance[0];
+                }
             }
             return m_Instance;
         }
     }
     protected virtual void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(Instance.gameObject);
     }
 
 }

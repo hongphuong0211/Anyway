@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Assets.HeroEditor4D.InventorySystem.Scripts.Elements;
+using UnityEngine.SceneManagement;
+
 namespace GamePlay
 {
     public class MyNetworkManager : NetworkRoomManager
@@ -22,6 +24,16 @@ namespace GamePlay
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
         {
             // call base functionality (actually destroys the player)
+            if (Utils.IsSceneActive(GameplayScene) && !UI_Game.Instance.IsOpened(UIID.UICEndGame))
+            {
+                UI_Game.Instance.CloseUI(UIID.UICGamePlay);
+                UICResult resultCanvas = UI_Game.Instance.OpenUI<UICResult>(UIID.UICEndGame);
+                resultCanvas.SetUp(-1, new int[4] { 20, 300, 1, -400 },
+                    new string[5] { "Hells", "kaks", "sid", "sd", "aoos" },
+                    new int[5] { 3000, 1200, 1023, 1332, 4122 });
+                CloudCodeManager.Instance.AddScore(-400);
+            }
+
             base.OnServerDisconnect(conn);
         }
         public override void OnServerSceneChanged(string sceneName)

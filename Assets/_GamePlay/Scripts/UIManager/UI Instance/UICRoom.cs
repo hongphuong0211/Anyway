@@ -42,6 +42,10 @@ namespace GamePlay
                 }
                 UI_Game.Instance.CloseUI(UIID.UICRoom);
                 UI_Game.Instance.OpenUI(UIID.UICMainMenu);
+                for (int i = roomView.childCount - 1; i >- 1; i--)
+                {
+                    Destroy(roomView.GetChild(i).gameObject);
+                }
             }
             else if (timeCount > 0)
             {
@@ -64,6 +68,11 @@ namespace GamePlay
         {
             if (isFull)
             {
+                if (MyNetworkManager.Instance.roomSlots.Count < MyNetworkManager.Instance.maxConnections)
+                {
+                    SetFullState(false);
+                    return;
+                }
                 if (!isReady)
                 {
                     if (timeCount > 0f)
@@ -90,7 +99,7 @@ namespace GamePlay
                 //     }
                 // }
             }
-            else if (MyNetworkManager.Instance.roomSlots.Count >= 2)
+            else if (MyNetworkManager.Instance.roomSlots.Count >= MyNetworkManager.Instance.maxConnections)
             {
                 SetFullState(true);
 
