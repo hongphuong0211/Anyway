@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using GamePlay;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,21 +29,32 @@ public class Decoder : NetworkBehaviour
     [SyncVar]
     private float efficiency;
 
+    [SerializeField] private Gate _gate;
+
+    private void Start()
+    {
+        SetStatus(status);
+        if (status == StatusDecoder.close)
+            IngameManager.Instance.RegisterStatue(this);
+    }
+
     private void FixedUpdate()
     {
+        //SetView(StatusDecoder.open, status);
         if (isServer)
         {
             if (status == StatusDecoder.open && isDecoded && efficiency > 0)
             {
                 if (currentProgress < maxProgress)
                 {
+                    Debug.Log("Break Statue Progress");
                     currentProgress += Time.fixedDeltaTime * efficiency;
                 }
                 else
                 {
                     SetStatus(StatusDecoder.done);
-                    MapManager.Instance.SetNewDecoderDone(this);
-                    Debug.Log("Count Decode: " + MapManager.Instance.decodersDone);
+                    // MapManager.Instance.SetNewDecoderDone(this);
+                    // Debug.Log("Count Decode: " + MapManager.Instance.decodersDone);
                 }
                 isDecoded = false;
                 efficiency = 0;
@@ -52,16 +65,24 @@ public class Decoder : NetworkBehaviour
                 efficiency = 0;
             }
         }
+
+        if (isClient)
+        {
+            SetBar(0, currentProgress);
+            if (currentProgress >= maxProgress && status != StatusDecoder.done)
+            {
+                SetStatus(StatusDecoder.done);
+            }
+        }
     }
     public override void OnStartServer()
     {
-        view = GetComponent<SpriteRenderer>();
+        //view = GetComponentInChildren<SpriteRenderer>();
         progressBar.maxValue = maxProgress;
     }
     [Command(requiresAuthority = false)]
     public void CmdDecodeMachine(NetworkIdentity user, float eff)
     {
-        Debug.Log(("user decode"));
         //user.AssignClientAuthority(connectionToClient);
         isDecoded = true;
         this.efficiency += eff;
@@ -78,11 +99,15 @@ public class Decoder : NetworkBehaviour
     }
     public void SetBar(float oldVar, float newVar)
     {
-        progressBar.value = newVar;
+        progressBar.value = Mathf.Min(newVar/maxProgress, 1.0f);
+        if (newVar >= maxProgress)
+        {
+            SetStatus(StatusDecoder.done);
+        }
     }
     public void SetStatus(StatusDecoder type)
     {
-        if ((int)type == 0)
+        if (type == StatusDecoder.open)
         {
             if (currentProgress >= maxProgress)
             {
@@ -90,9 +115,14 @@ public class Decoder : NetworkBehaviour
                 return;
             }
         }
-        else if ((int)type == 2)
+        else if (type == StatusDecoder.done)
         {
             actionComplete?.Invoke();
+            IngameManager.Instance.BreakStatue(this);
+            if (_gate != null)
+            {
+                _gate.OpenGate();
+            }
         }
         this.status = type;
         view.color = color[(int)type];

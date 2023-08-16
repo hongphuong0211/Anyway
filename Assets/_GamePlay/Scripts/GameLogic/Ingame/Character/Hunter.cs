@@ -55,6 +55,7 @@ namespace GamePlay
         {
             if (currentTarget != null)
             {
+                AnimAttack();
                 //IngameManager.Instance.Player.CmdChangeAnimation((AnimationPlayer.Attack));
                 IngameManager.Instance.Player.CmdMagic(currentTarget, 50);
                 ChangeState(null);

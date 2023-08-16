@@ -9,6 +9,8 @@ namespace GamePlay
         public Dictionary<Collider2D, Player> m_Players = new Dictionary<Collider2D, Player>();
         private CameraFollower m_CameraFollower;
         private Player m_Player;
+
+        private int brokenStatue;
         // public Room m_CurrentRoom;
         public int m_CurrentRoomID;
         public GameObject m_DecoderPrefab;
@@ -91,6 +93,10 @@ namespace GamePlay
             Vector3 spawnPos = new Vector3(0, 0.05f, 0);
             m_Player.InitCharacter(selectedCharID,
                                            spawnPos);
+            brokenStatue = 0;
+            statueClose = new List<Decoder>();
+            IsClearRoom = false;
+            statueBrokens = new List<Decoder>();
         }
 
         public void EndGame()
@@ -118,6 +124,46 @@ namespace GamePlay
                 CloudCodeManager.Instance.AddScore(result * 400 + 200);
                 ProfileManager.MyProfile.SaveDataToLocal();
                 IsEndGame = true;
+            }
+        }
+
+        private List<Decoder> statueClose;
+
+        public void RegisterStatue(Decoder statue)
+        {
+            if (statueClose == null)
+            {
+                statueClose = new List<Decoder>();
+            }
+            Debug.Log("register statue: " + statueClose.Count);
+            if (!statueClose.Contains(statue))
+            {
+                statueClose.Add(statue);
+            }
+        }
+
+        private List<Decoder> statueBrokens;
+        public void BreakStatue(Decoder statueBroken)
+        {
+            if (statueBrokens == null)
+            {
+                statueBrokens = new List<Decoder>();
+            }
+
+            if (!statueBrokens.Contains(statueBroken))
+            {
+                statueBrokens.Add(statueBroken);
+                brokenStatue++;
+                UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).SetCountStatue(Mathf.Max(0, 5 - brokenStatue));
+                Debug.Log("Count Statue: " + brokenStatue);
+                if (brokenStatue >= 5 && !IsClearRoom)
+                {
+                    IsClearRoom = true;
+                    foreach (var statue in statueClose)
+                    {
+                        statue.SetStatus(StatusDecoder.open);
+                    }
+                }
             }
         }
         public void InitLevel(int level, int world)

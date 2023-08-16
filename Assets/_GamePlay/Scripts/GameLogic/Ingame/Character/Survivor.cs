@@ -18,7 +18,8 @@ namespace GamePlay
                     IngameManager.Instance.m_Decoders.Add(other, other.gameObject.GetComponent<Decoder>());
                 }
                 currentDecoder = IngameManager.Instance.m_Decoders[other];
-                if (currentDecoder != null && currentDecoder.status == 0)
+                if (currentDecoder != null) Debug.Log("Trigger decoder: " + (int)currentDecoder.status);
+                if (currentDecoder != null && currentDecoder.status == StatusDecoder.open)
                 {
                     UI_Game.Instance.GetUI<UICGamePlay>(UIID.UICGamePlay).ActiveDecode(true, StartDecode);
                 }
@@ -39,7 +40,6 @@ namespace GamePlay
         }
         private void StartDecode()
         {
-            Debug.Log("Start Decode");
             ChangeState(DecodeState.Instance);
         }
         #region StateMachine
@@ -60,8 +60,8 @@ namespace GamePlay
         {
             if (currentDecoder != null)
             {
-                //IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Decode);
-                currentDecoder.CmdDecodeMachine(IngameManager.Instance.Player.netIdentity, 10);
+                IngameManager.Instance.Player.CmdChangeAnimation(AnimationPlayer.Slash);
+                currentDecoder.CmdDecodeMachine(IngameManager.Instance.Player.netIdentity, m_CharacterDataConfig.decodeSpeed);
             }
             else
             {

@@ -42,10 +42,6 @@ namespace GamePlay
                 }
                 UI_Game.Instance.CloseUI(UIID.UICRoom);
                 UI_Game.Instance.OpenUI(UIID.UICMainMenu);
-                for (int i = roomView.childCount - 1; i >- 1; i--)
-                {
-                    Destroy(roomView.GetChild(i).gameObject);
-                }
             }
             else if (timeCount > 0)
             {

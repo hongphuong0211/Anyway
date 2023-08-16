@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1cb3ec890e027ece",
         "name": "com.abi.anyway",
-        "processId": 27011,
+        "processId": 11743,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -48,6 +48,24 @@
             "deviceId": "1cb3ec890e027ece",
             "name": "com.abi.anyway",
             "processId": 27011,
+            "exited": false
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.abi.anyway",
+            "processId": 18864,
+            "exited": false
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.abi.anyway",
+            "processId": 19364,
+            "exited": false
+        },
+        {
+            "deviceId": "1cb3ec890e027ece",
+            "name": "com.abi.anyway",
+            "processId": 11743,
             "exited": false
         }
     ],

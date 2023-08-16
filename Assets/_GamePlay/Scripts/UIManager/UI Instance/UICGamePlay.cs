@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 namespace GamePlay
 {
     public class UICGamePlay : UICanvas
@@ -14,6 +15,7 @@ namespace GamePlay
         [SerializeField] private Button buttonDecode;
         [SerializeField] private Button buttonAttack;
         [SerializeField] private StateUser[] m_StateUser;
+        [SerializeField] private TextMeshProUGUI textStatue;
         public override void Open()
         {
             base.Open();
@@ -55,6 +57,11 @@ namespace GamePlay
             {
                 m_StateUser[index - 1].ChangeState(hp);
             }
+        }
+
+        public void SetCountStatue(int count)
+        {
+            textStatue.SetText(("Statue: " + count));
         }
     }
 }
